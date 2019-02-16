@@ -32,8 +32,11 @@ data of bacterial genomes and their antimicrobial resistance genes.
 Requirements
 
 CheckM
+
 Python 3 with pandas ( https://pandas.pydata.org/)
+
 RandomForest package in R
+
 DIAMOND
 
 Optional: Jelly
