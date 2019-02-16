@@ -29,6 +29,15 @@ Conclusion: The newly developed tool is able to determine if contigs are chromos
 with a very high specificity and sensitivity (up to 99%) and can be very useful to analyze WGS
 data of bacterial genomes and their antimicrobial resistance genes.
 
+Requirements
+
+CheckM
+Python 3 with pandas ( https://pandas.pydata.org/)
+RandomForest package in R
+DIAMOND
+
+Optional: Jelly
+
 Usage: 
 
 python3 plaspred_total_nov2018v2.py [-h] --species SPECIES --input INPUT
@@ -38,3 +47,6 @@ python3 plaspred_total_nov2018v2.py [-h] --species SPECIES --input INPUT
 --jelly required a functional jelly install. Greatly speeds up the analysis
 
 read specieslist.txt for species specific models.
+
+Plasmid databases can be downloaded from: http://klif.uu.nl/download/plasmid_db/
+
