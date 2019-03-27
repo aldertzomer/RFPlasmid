@@ -44,7 +44,7 @@ Optional: Jelly
 
 Usage: 
 
-python3 plaspred_total_nov2018v2.py [-h] --species SPECIES --input INPUT
+python3 rfplasmid.py [-h] --species SPECIES --input INPUT
                                    [--training] [--specieslist] [--jelly]
                                    [--out OUT] [--debug] [--threads THREADS]
 
