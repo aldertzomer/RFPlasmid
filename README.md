@@ -74,3 +74,4 @@ read specieslist.txt for species specific models.
 
 Plasmid databases can be downloaded from: http://klif.uu.nl/download/plasmid_db/
 
+Data used for training can be downloaded here: http://klif.uu.nl/download/plasmid_db/trainingsets2/
