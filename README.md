@@ -32,23 +32,33 @@ data of bacterial genomes and their antimicrobial resistance genes.
 
 Requirements
 
-CheckM
-
 Python 3 with pandas ( https://pandas.pydata.org/)
+```
+% sudo pip install pandas
+```
+CheckM ( https://ecogenomics.github.io/CheckM/ )
+```
+% sudo pip install numpy
+% sudo pip install checkm-genome
+```
 
-RandomForest package in R
+RandomForest package in R ( https://cran.r-project.org/web/packages/randomForest/index.html )
 
-DIAMOND
+DIAMOND ( https://github.com/bbuchfink/diamond )
+```
+% wget http://github.com/bbuchfink/diamond/releases/download/v0.9.24/diamond-linux64.tar.gz
+% tar xzf diamond-linux64.tar.gz
+```
 
-Optional: Jelly
+Optional: Jellyfish ( http://www.genome.umd.edu/jellyfish.html )
 
 Usage: 
-
-python3 rfplasmid.py [-h] --species SPECIES --input INPUT
+```
+% python3 rfplasmid.py [-h] --species SPECIES --input INPUT
                                    [--training] [--specieslist] [--jelly]
                                    [--out OUT] [--debug] [--threads THREADS]
-
---jelly required a functional jelly install. Greatly speeds up the analysis
+```
+--jelly requires a functional jelly install. Greatly speeds up the analysis
 
 read specieslist.txt for species specific models.
 
