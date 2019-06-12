@@ -34,20 +34,25 @@ Requirements
 
 Python 3 with pandas ( https://pandas.pydata.org/)
 ```
-% sudo pip install pandas
+$ sudo pip install pandas
 ```
 CheckM ( https://ecogenomics.github.io/CheckM/ )
 ```
-% sudo pip install numpy
-% sudo pip install checkm-genome
+$ sudo pip install numpy
+$ sudo pip install checkm-genome
 ```
 
 RandomForest package in R ( https://cran.r-project.org/web/packages/randomForest/index.html )
+```
+$ sudo R
+> install.packages("randomForest")
+```
 
 DIAMOND ( https://github.com/bbuchfink/diamond )
 ```
-% wget http://github.com/bbuchfink/diamond/releases/download/v0.9.24/diamond-linux64.tar.gz
-% tar xzf diamond-linux64.tar.gz
+$ wget http://github.com/bbuchfink/diamond/releases/download/v0.9.24/diamond-linux64.tar.gz
+$ tar xzf diamond-linux64.tar.gz
+$ sudo cp diamond /usr/local/bin/diamond
 ```
 
 Recommended: Jellyfish ( http://www.genome.umd.edu/jellyfish.html )
@@ -59,7 +64,7 @@ $ sudo chmod +x /usr/local/bin/jellyfish
 
 Usage: 
 ```
-% python3 rfplasmid.py [-h] --species SPECIES --input INPUT
+$ python3 rfplasmid.py [-h] --species SPECIES --input INPUT
                                    [--training] [--specieslist] [--jelly]
                                    [--out OUT] [--debug] [--threads THREADS]
 ```
