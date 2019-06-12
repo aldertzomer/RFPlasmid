@@ -51,6 +51,11 @@ DIAMOND ( https://github.com/bbuchfink/diamond )
 ```
 
 Optional: Jellyfish ( http://www.genome.umd.edu/jellyfish.html )
+```
+$ wget https://github.com/gmarcais/Jellyfish/releases/download/v2.2.10/jellyfish-linux
+$ sudo cp jellyfish-linux /usr/local/bin/jelly
+$ sudo chmod +x /usr/local/bin/jelly
+```
 
 Usage: 
 ```
@@ -58,7 +63,7 @@ Usage:
                                    [--training] [--specieslist] [--jelly]
                                    [--out OUT] [--debug] [--threads THREADS]
 ```
---jelly requires a functional jelly install. Greatly speeds up the analysis
+--jelly requires a functional jelly install. Greatly speeds up the analysis. Strongly recommended as our kmer profiling method in Python is slow
 
 read specieslist.txt for species specific models.
 
