@@ -34,12 +34,13 @@ Requirements
 
 Python 3 with pandas ( https://pandas.pydata.org/)
 ```
-$ sudo pip install pandas
+$ sudo pip3 install pandas
 ```
 CheckM ( https://ecogenomics.github.io/CheckM/ )
+Unfortunately CheckM is still Python 2 while RFplasmid requires Python 3.
 ```
-$ sudo pip install numpy
-$ sudo pip install checkm-genome
+$ sudo pip2 install numpy
+$ sudo pip2 install checkm-genome
 ```
 
 RandomForest package in R ( https://cran.r-project.org/web/packages/randomForest/index.html )
