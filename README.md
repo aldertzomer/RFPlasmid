@@ -75,8 +75,9 @@ Usage:
 $ python3 rfplasmid.py [-h] --species SPECIES --input INPUT
                                    [--training] [--specieslist] [--jelly]
                                    [--out OUT] [--debug] [--threads THREADS]
-#example
-python3 rfplasmid.py --species Campylobacter --input example --jelly --threads 8 --out example_out
+# example
+python3 rfplasmid.py --species Campylobacter --input example --jelly --threads 8 --out output
+# compare output with the folder example_out
 ```
 
 --jelly requires a functional jellyfish install. Greatly speeds up the analysis. Strongly recommended as our kmer profiling method in Python is slow
