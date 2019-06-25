@@ -75,10 +75,13 @@ Usage:
 $ python3 rfplasmid.py [-h] --species SPECIES --input INPUT
                                    [--training] [--specieslist] [--jelly]
                                    [--out OUT] [--debug] [--threads THREADS]
+#example
+python3 rfplasmid.py --species Campylobacter --input example --jelly --threads 8 --out example_out                     
 ```
+
 --jelly requires a functional jellyfish install. Greatly speeds up the analysis. Strongly recommended as our kmer profiling method in Python is slow
 
-read specieslist.txt for species specific models.
+read specieslist.txt for species specific models. We have a general Enterobacteriaceae model instead of a species model. All others are species.
 
 Plasmid databases can be downloaded from: http://klif.uu.nl/download/plasmid_db/
 
