@@ -63,6 +63,13 @@ $ sudo cp jellyfish-linux /usr/local/bin/jellyfish
 $ sudo chmod +x /usr/local/bin/jellyfish
 ```
 
+Getting the software:
+```
+$ git clone https://github.com/aldertzomer/RFPlasmid.git
+$ cd RFPlasmid
+$ bash getdb.sh # downloads and formats the plasmid DBs
+```
+
 Usage: 
 ```
 $ python3 rfplasmid.py [-h] --species SPECIES --input INPUT
