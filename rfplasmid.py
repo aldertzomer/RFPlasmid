@@ -140,12 +140,12 @@ cgedb_file = os.path.join(scriptlocation, "plasmiddb_cge")
 
 for fasta_file in glob.glob('*.fasta'):
 	basename = os.path.splitext(os.path.basename(fasta_file))[0]
-	output_file = basename + '_blast_plasmiddb_output.txt'
+	output_file = basename + '_blast_plasmidcge_output.txt'
 	os.system('diamond blastx -d {} -q {} -e 1E-30 -k 1 > {}'.format(cgedb_file, fasta_file, output_file))
 
-for cge_file in glob.glob('*_blast_plasmiddb_output.txt'):	
+for cge_file in glob.glob('*_blast_plasmidcge_output.txt'):	
 	with open(cge_file, 'r') as f1:
-		genome_name = str(cge_file).split('_')[:-1][0]
+		genome_name = str(cge_file).split('_blast')[:-1][0]
 		df1 = pd.read_csv(f1, header=None, delim_whitespace=True, usecols=[0,2], names=['contig', 'hit'])
 		df1['hit'] = df1['hit'].astype(float)
 		df1 = df1.loc[df1.groupby('contig')['hit'].idxmax()]
