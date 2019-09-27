@@ -85,7 +85,7 @@ python3 rfplasmid.py --species Campylobacter --input example --jelly --threads 8
 
 --jelly requires a functional jellyfish install. Greatly speeds up the analysis. Strongly recommended as our kmer profiling method in Python is slow
 
-read specieslist.txt for species specific models. We have a general Enterobacteriaceae model instead of a species model. All others are species.
+Read specieslist.txt for species specific models. We have a general Enterobacteriaceae model instead of a species model. All others are species except for the "Bacteria" model which can be used for unknown or metagenomics samples.
 
 Plasmid databases can be downloaded from: http://klif.uu.nl/download/plasmid_db/
 
