@@ -18,4 +18,4 @@ Streptomyces genus
 Vibrio genus
 Xanthomonas genus
 Enterobacteriaceae family
-metagenome domain
+Bacteria domain
