@@ -30,6 +30,9 @@ Conclusion: The newly developed tool is able to determine if contigs are chromos
 with a very high specificity and sensitivity (up to 99%) and can be very useful to analyze WGS
 data of bacterial genomes and their antimicrobial resistance genes.
 
+A rudimentary web-interface to test single fasta files is available here: http://klif.uu.nl/rfplasmid/
+
+
 Requirements
 
 Python 3 with pandas ( https://pandas.pydata.org/)
