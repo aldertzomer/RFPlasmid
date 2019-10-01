@@ -29,7 +29,7 @@ def cpu_threads(max_threads):
 #laat species en specieslevel in
 parser = argparse.ArgumentParser()
 parser.add_argument("--species", help="define species", required=True)
-parser.add_argument("--input", help="folder with fasta files", required=True)
+parser.add_argument("--in", help="input folder with fasta files", required=True)
 parser.add_argument("--training", help="trainings mode Random Forest", action="store_true", default=False)
 parser.add_argument("--specieslist", help="list of species", action="store_true", default=False)
 parser.add_argument("--jelly", help="run jellyfish as kmer-count (faster)", action="store_true", default=False)
@@ -38,7 +38,7 @@ parser.add_argument("--debug", help="no cleanup of intermediate files", action="
 parser.add_argument("--threads", help="specify number of threads to be used, default is max available threads up to 16 threads", default=cpu_threads(16), required=False, type=int)
 args = parser.parse_args()
 species_import = args.species	
-input_directory = args.input
+input_directory = args.in
 
 species_file = os.path.join(scriptlocation, "specieslist.txt")
 df_species = pd.read_csv(species_file, header=None, sep=' ', names = ['species', 'level'] )
@@ -208,6 +208,8 @@ if args.jelly:
 	print('Jellyfish kmer-count done')
 if not (args.jelly):
 	print('Standard kmer-counting method')
+	kmer_dir = 'fasta_split'
+	os.mkdir(kmer_dir)
 	def count_kmers(read, k):
 		counts = defaultdict(list)
 		num_kmers = len(read) - k + 1
