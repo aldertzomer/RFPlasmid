@@ -79,7 +79,7 @@ for fasta_file in glob.glob(os.path.join(input_directory, '*.fasta')):
         records = SeqIO.parse(f_fasta, 'fasta')
         for record in records:
             i = i + 1
-            contig_id = basename + ',' + str(i) + ',' + record.id
+            contig_id = basename + ',' + str(i) + ',' + record.description
             with open(new_dir+'/contigID.out' ,'a') as ID_file: 
                 ID_file.write(contig_id + '\n') 
 				
