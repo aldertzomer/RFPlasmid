@@ -30,7 +30,7 @@ Conclusion: The newly developed tool is able to determine if contigs are chromos
 with a very high specificity and sensitivity (up to 99%) and can be very useful to analyze WGS
 data of bacterial genomes and their antimicrobial resistance genes.
 
-A rudimentary web-interface to test single fasta files is available here: http://klif.uu.nl/rfplasmid/
+A web-interface to test single fasta files is available here: http://klif.uu.nl/rfplasmid/
 
 
 Requirements
@@ -40,10 +40,11 @@ Python 3 with pandas ( https://pandas.pydata.org/)
 $ sudo pip3 install pandas
 ```
 CheckM ( https://ecogenomics.github.io/CheckM/ )
-Unfortunately CheckM is still Python 2 while RFplasmid requires Python 3.
 ```
-$ sudo pip2 install numpy
-$ sudo pip2 install checkm-genome
+$ sudo pip3 install numpy
+$ sudo pip3 install scipy
+$ sudo pip3 install pysam
+$ sudo pip3 install checkm-genome
 ```
 
 RandomForest package in R ( https://cran.r-project.org/web/packages/randomForest/index.html )
@@ -59,7 +60,7 @@ $ tar xzf diamond-linux64.tar.gz
 $ sudo cp diamond /usr/local/bin/diamond
 ```
 
-Recommended: Jellyfish ( http://www.genome.umd.edu/jellyfish.html )
+Strongly recommended: Jellyfish ( http://www.genome.umd.edu/jellyfish.html )
 ```
 $ wget https://github.com/gmarcais/Jellyfish/releases/download/v2.2.10/jellyfish-linux
 $ sudo cp jellyfish-linux /usr/local/bin/jellyfish
