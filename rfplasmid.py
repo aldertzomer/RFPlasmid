@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import csv, os, re, sys, glob, argparse, shutil, multiprocessing
 import pandas as pd
@@ -9,16 +9,7 @@ from pathlib import Path
 from itertools import chain, groupby
 from datetime import datetime
 
-
-
-script_location = os.path.dirname(sys.argv[0])     
-scriptlocation = os.path.abspath(script_location)  
-
-if not sys.version_info[0] == 3:
-	print('Error, please use python 3')
-	sys.exit()
-else:
-	print('Python version ok')
+scriptlocation= os.path.dirname(os.path.abspath(__file__))
 	
 def cpu_threads(max_threads):
 	if multiprocessing.cpu_count() > max_threads:
@@ -28,8 +19,8 @@ def cpu_threads(max_threads):
 	
 #laat species en specieslevel in
 parser = argparse.ArgumentParser()
-parser.add_argument("--species", help="define species", required=True)
-parser.add_argument("--input", help="input folder with fasta files", required=True)
+parser.add_argument("--species", help="define species", required= "--specieslist" not in sys.argv and len(sys.argv) != 1)
+parser.add_argument("--input", help="input folder with fasta files", required= "--specieslist" not in sys.argv and len(sys.argv) != 1)
 parser.add_argument("--training", help="trainings mode Random Forest", action="store_true", default=False)
 parser.add_argument("--specieslist", help="list of species", action="store_true", default=False)
 parser.add_argument("--jelly", help="run jellyfish as kmer-count (faster)", action="store_true", default=False)
@@ -45,8 +36,12 @@ df_species = pd.read_csv(species_file, header=None, sep=' ', names = ['species',
 level_import = next(iter(df_species.loc[df_species['species'] == species_import, 'level']), 'no match')
 species_list = df_species['species'].tolist()
 
+if len(sys.argv) == 1:
+	parser.print_help(sys.stderr)
+	sys.exit()
+
 if args.specieslist:
-	print(species_list)
+	print('Available species: \n{}'.format(df_species.species.to_csv(index=False)))
 	sys.exit()
 
 #check if species exist in list
@@ -55,7 +50,7 @@ if args.species in species_list:
 	print('species exist; continue')
 else:
 	print('species classification scheme not available')
-	print('Available species: {}'.format(species_list))
+	print('Available species: \n{}'.format(df_species.species.to_csv(index=False)))
 	sys.exit()
 
 print('Start plasmid prediction, version 0.0')	
