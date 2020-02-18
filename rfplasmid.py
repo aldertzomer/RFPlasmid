@@ -315,7 +315,7 @@ kmer_file = os.path.join(scriptlocation, "kmer.txt")
 df2 = pd.read_csv(kmer_file, delim_whitespace=True,header=None)
 #use row as columnheaders
 df2.columns = df2.iloc[0]
-df2 = df2.ix[:-1]
+df2 = df2.loc[:-1]
 
 #samenvoegen dfs
 df3 = pd.concat([df1, df2], axis=1)
