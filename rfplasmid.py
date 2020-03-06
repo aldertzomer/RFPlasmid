@@ -8,6 +8,7 @@ from collections import defaultdict
 from pathlib import Path
 from itertools import chain, groupby
 from datetime import datetime
+from contextlib import suppress
 
 scriptlocation= os.path.dirname(os.path.abspath(__file__))
 	
@@ -74,7 +75,7 @@ for fasta_file in glob.glob(os.path.join(input_directory, '*.fasta')):
         records = SeqIO.parse(f_fasta, 'fasta')
         for record in records:
             i = i + 1
-            contig_id = basename + ',' + str(i) + ',' + record.description
+            contig_id = basename + '\t' + str(i) + '\t' + record.description
             with open(new_dir+'/contigID.out' ,'a') as ID_file: 
                 ID_file.write(contig_id + '\n') 
 				
@@ -115,15 +116,16 @@ for root, dirs, files in os.walk(os.getcwd()):
 	filepath = os.path.join(root, 'blast_plasmiddb_output.txt')
 	if os.path.isfile(filepath):
 		with open(filepath, 'r') as f1:
-			df1 = pd.read_csv(f1, header=None, delim_whitespace=True, usecols=[0,2], names=['contig_gene', 'hit'])
-			df1['hit'] = df1['hit'].round(0).astype(int)	
-			df1 = df1.loc[df1['hit'] > 80]
-			df1['contig_gene'] = df1['contig_gene'].drop_duplicates()
-			df1['contig'], df1['gene'] = df1['contig_gene'].str.split('_', 1).str
-			df2 = df1.groupby(['contig']).size().reset_index(name='counts')
-			output_file = os.path.join(root, 'plasmiddbgenes_per_contig.txt')
-			with open (output_file, 'w') as out_file:
-				df2.to_csv(out_file, sep=' ', index=False, header=False)
+			with suppress(ValueError):
+				df1 = pd.read_csv(f1, header=None, delim_whitespace=True, usecols=[0,2], names=['contig_gene', 'hit'])
+				df1['hit'] = df1['hit'].round(0).astype(int)	
+				df1 = df1.loc[df1['hit'] > 80]
+				df1['contig_gene'] = df1['contig_gene'].drop_duplicates()
+				df1['contig'], df1['gene'] = df1['contig_gene'].str.split('_', 1).str
+				df2 = df1.groupby(['contig']).size().reset_index(name='counts')
+				output_file = os.path.join(root, 'plasmiddbgenes_per_contig.txt')
+				with open (output_file, 'w') as out_file:
+					df2.to_csv(out_file, sep=' ', index=False, header=False)
 	else:
 		continue
 
@@ -140,12 +142,13 @@ for fasta_file in glob.glob('*.fasta'):
 
 for cge_file in glob.glob('*_blast_plasmidcge_output.txt'):	
 	with open(cge_file, 'r') as f1:
-		genome_name = str(cge_file).split('_blast')[:-1][0]
-		df1 = pd.read_csv(f1, header=None, delim_whitespace=True, usecols=[0,2], names=['contig', 'hit'])
-		df1['hit'] = df1['hit'].astype(float)
-		df1 = df1.loc[df1.groupby('contig')['hit'].idxmax()]
-		df1['genome'] = genome_name
-		df1.to_csv('blast_plasmid_cge_outputpercontig.out', index=False, header=False, sep=' ', mode = 'a')
+		with suppress(ValueError):
+			genome_name = str(cge_file).split('_blast')[:-1][0]
+			df1 = pd.read_csv(f1, header=None, delim_whitespace=True, usecols=[0,2], names=['contig', 'hit'])
+			df1['hit'] = df1['hit'].astype(float)
+			df1 = df1.loc[df1.groupby('contig')['hit'].idxmax()]
+			df1['genome'] = genome_name
+			df1.to_csv('blast_plasmid_cge_outputpercontig.out', index=False, header=False, sep=' ', mode = 'a')
 
 print('blast cge genes done')
 
@@ -174,14 +177,15 @@ for root, dirs, files in os.walk(os.getcwd()):
 	basename = os.path.basename(os.path.dirname(filepath))
 	if os.path.isfile(filepath):
 		with open(filepath, 'r') as scm_file:
-			df = pd.read_csv(scm_file, header=None, delim_whitespace=True, usecols=[0], names=['contig_gene'])
-			df = df[~df['contig_gene'].str.contains("#")]
-			df['contig_gene'] = df['contig_gene'].drop_duplicates()
-			df['contig'], df['gene'] = df['contig_gene'].str.split('_', 1).str
-			df2 = df.groupby(['contig']).size().reset_index(name='counts')
-			output_file = os.path.join(root, 'SCMpercontig.txt')
-			with open (output_file, 'w') as out_file:
-				df2.to_csv(out_file, sep=' ', index=False, header=False)
+			with suppress(ValueError):
+				df = pd.read_csv(scm_file, header=None, delim_whitespace=True, usecols=[0], names=['contig_gene'])
+				df = df[~df['contig_gene'].str.contains("#")]
+				df['contig_gene'] = df['contig_gene'].drop_duplicates()
+				df['contig'], df['gene'] = df['contig_gene'].str.split('_', 1).str
+				df2 = df.groupby(['contig']).size().reset_index(name='counts')
+				output_file = os.path.join(root, 'SCMpercontig.txt')
+				with open (output_file, 'w') as out_file:
+					df2.to_csv(out_file, sep=' ', index=False, header=False)
 print('count SCMs per contig done')
 
 print('Start kmer count')
@@ -259,32 +263,35 @@ for root, dirs, files in os.walk(os.getcwd()):
     filepath = os.path.join(root, 'genespercontig.txt')
     if os.path.isfile(filepath):
         with open(filepath, 'r') as f1:
-            df1 = pd.read_csv(f1, header=None, delim_whitespace=True, names = ["contig", "genes"])
+            df1 = pd.read_csv(f1, header=None, delim_whitespace=True, names = ['contig', 'genes'])
             df1['genome'] = os.path.basename(os.path.dirname(filepath))
     else:
         continue
-
+		
     filepath = os.path.join(root, 'SCMpercontig.txt')
     if os.path.isfile(filepath):
        	with open(filepath, 'r') as f2:
-            df2 = pd.read_csv(f2, header=None, delim_whitespace=True, names = ["contig", "SCM"])
+            df2 = pd.read_csv(f2, header=None, delim_whitespace=True, names = ['contig', 'SCM'])
             df2['genome'] = os.path.basename(os.path.dirname(filepath))
-    else:
-        continue
-            
+    if not os.path.isfile(filepath):
+        df2 = df1
+        df2 = df2.rename(columns={'genes': 'SCM'}) 
+        df2['SCM'] = np.NaN	
+      	
     filepath = os.path.join(root, 'plasmiddbgenes_per_contig.txt')
     if os.path.isfile(filepath):
         with open(filepath, 'r') as f3:
-            df3 = pd.read_csv(f3, header=None, delim_whitespace=True, names = ["contig", "plasmid_genes"])
+            df3 = pd.read_csv(f3, header=None, delim_whitespace=True, names = ['contig', 'plasmid_genes'])
             df3['genome'] = os.path.basename(os.path.dirname(filepath))
-    else:
-        continue
+    if not os.path.isfile(filepath):
+        df3 = df1
+        df3 = df3.rename(columns={'genes': 'plasmid_genes'}) 
+        df3['SCM'] = np.NaN	
 		
     #merge dataframes for each folder
-    dfmerge1 = pd.merge(df1, df2, on=['genome', 'contig'], how='outer')
-    df_end = pd.merge(dfmerge1, df3, on=['genome', 'contig'], how='outer')
-
-    df_end.to_csv(os.path.join(root,'outputgenesdf.csv'))
+    df_merge1 = pd.merge(df1, df2, left_on=['genome', 'contig'], right_on=['genome', 'contig'], how='left') 
+    df_merge2 = pd.merge(df_merge1, df3, on=['genome', 'contig'], how='left') 
+    df_merge2.to_csv(os.path.join(root,'outputgenesdf.csv'))
 print('Create df_files ; done')
 
 #next step: concatenate csv files
@@ -298,11 +305,13 @@ for root, dirs, files in os.walk(os.getcwd()):
             dfList.append(frame)    
 
 df1a = pd.concat(dfList)
+df1a['contig']=df1a['contig'].astype(object)
 
 #import contigIDnumbers
-df1b = pd.read_csv('contigID.out', header=None, sep=',', names = ['genome', 'contig', 'contigID'])
-df1b['genome'] = df1b['genome'].astype(object)
+df1b = pd.read_csv('contigID.out', header=None, sep='\t', names = ['genome', 'contig', 'contigID'])
+df1b['contig']=df1b['contig'].astype(object)
 df1 = pd.merge(df1a, df1b, how='right', left_on=['genome','contig'], right_on = ['genome','contig'])
+df1['contig']=df1['contig'].astype(int)
 df1['source'] = df1.genome.astype(str).str.cat(df1.contig.astype(str), sep='_')
 df1 = df1.set_index('source')
 
@@ -325,7 +334,7 @@ df3 = df3.set_index('source')
 #import kmers
 if args.jelly:
 	df4 = pd.read_csv('kmers.out', sep=' ', low_memory=False, header=None, names = ['source', 'gene', 'bitscore'])
-	df4['genome'], df4['contig'] = df4['source'].str.split('_', 1).str
+	df4['genome'], df4['contig'] = df4['source'].str.rsplit('_', 1).str
 if not (args.jelly):
 	df4 = pd.read_csv('kmer.out', sep=' ', low_memory=False, header=None, names = ['genome', 'contig', 'gene', 'bitscore'])
 	df4['source'] = df4.genome.astype(str).str.cat(df4.contig.astype(str), sep='_')
@@ -393,7 +402,7 @@ df6.loc[:, 'kmer1':'kmer1024'] = df6.loc[:, 'kmer1':'kmer1024'].applymap('{:.2e}
 
 #delete some columns
 df6.drop(df6.columns.to_series()["AAAAA":"TTTTT"], axis=1, inplace=True) #drop kmer numbers
-df6.drop(['genome', 'contig', 'genes'], axis=1, inplace=True)
+df6.drop(['contig','genes'], axis=1, inplace=True)
 
 df6.to_csv('outputdataframe.csv', index = False)
 
