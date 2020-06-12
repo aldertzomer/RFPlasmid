@@ -84,6 +84,8 @@ python3 rfplasmid.py --species Campylobacter --input example --jelly --threads 8
 # compare output with the folder example_out
 ```
 
+A folder containing .fasta file is required as input.
+
 --jelly requires a functional jellyfish install. Greatly speeds up the analysis. Strongly recommended as our kmer profiling method in Python is slow
 
 Read specieslist.txt for species specific models. We have a general Enterobacteriaceae model instead of a species model. All others are species except for the "Bacteria" model which can be used for unknown or metagenomics samples.
