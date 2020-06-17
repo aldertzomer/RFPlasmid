@@ -32,6 +32,11 @@ data of bacterial genomes and their antimicrobial resistance genes.
 
 A web-interface to test single fasta files is available here: http://klif.uu.nl/rfplasmid/
 
+For quick install. Omit sudo if doing a local install
+```
+$ sudo pip3 install rfplasmid
+$ sudo rfplasmid # Should install the databases as well provided all requirements are met
+```
 
 Requirements
 
