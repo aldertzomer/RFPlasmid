@@ -21,7 +21,7 @@ def cpu_threads(max_threads):
 #laat species en specieslevel in
 parser = argparse.ArgumentParser()
 parser.add_argument("--species", help="define species", required= "--specieslist" not in sys.argv and len(sys.argv) != 1)
-parser.add_argument("--in", help="directory with input fasta files", required= "--specieslist" not in sys.argv and len(sys.argv) != 1)
+parser.add_argument("--input", help="directory with input fasta files", required= "--specieslist" not in sys.argv and len(sys.argv) != 1)
 parser.add_argument("--training", help="trainings mode Random Forest", action="store_true", default=False)
 parser.add_argument("--specieslist", help="list of species", action="store_true", default=False)
 parser.add_argument("--jelly", help="run jellyfish as kmer-count (faster)", action="store_true", default=False)
@@ -30,7 +30,7 @@ parser.add_argument("--debug", help="no cleanup of intermediate files", action="
 parser.add_argument("--threads", help="specify number of threads to be used, default is max available threads up to 16 threads", default=cpu_threads(16), required=False, type=int)
 args = parser.parse_args()
 species_import = args.species	
-input_directory = args.in
+input_directory = args.input
 
 #check if input is directory
 if os.path.isdir(input_directory):
@@ -60,7 +60,7 @@ else:
 	print('Available species: \n{}'.format(df_species.species.to_csv(index=False)))
 	sys.exit()
 
-print('Start plasmid prediction, version 0.0.8')	
+print('Start plasmid prediction, version 0.0.9')	
 	
 #make output folder	
 if args.out:
