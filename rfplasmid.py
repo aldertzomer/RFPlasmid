@@ -10,7 +10,7 @@ from itertools import chain, groupby
 from datetime import datetime
 from contextlib import suppress
 
-scriptlocation= os.path.dirname(os.path.abspath(__file__))
+scriptlocation= os.path.dirname(os.path.realpath(__file__))
 	
 def cpu_threads(max_threads):
 	if multiprocessing.cpu_count() > max_threads:
@@ -21,16 +21,23 @@ def cpu_threads(max_threads):
 #laat species en specieslevel in
 parser = argparse.ArgumentParser()
 parser.add_argument("--species", help="define species", required= "--specieslist" not in sys.argv and len(sys.argv) != 1)
-parser.add_argument("--input", help="input folder with fasta files", required= "--specieslist" not in sys.argv and len(sys.argv) != 1)
+parser.add_argument("--in", help="directory with input fasta files", required= "--specieslist" not in sys.argv and len(sys.argv) != 1)
 parser.add_argument("--training", help="trainings mode Random Forest", action="store_true", default=False)
 parser.add_argument("--specieslist", help="list of species", action="store_true", default=False)
 parser.add_argument("--jelly", help="run jellyfish as kmer-count (faster)", action="store_true", default=False)
-parser.add_argument("--out", help="specify output folder", default=False)
+parser.add_argument("--out", help="specify output directory", default=False)
 parser.add_argument("--debug", help="no cleanup of intermediate files", action="store_true", default=False)
 parser.add_argument("--threads", help="specify number of threads to be used, default is max available threads up to 16 threads", default=cpu_threads(16), required=False, type=int)
 args = parser.parse_args()
 species_import = args.species	
-input_directory = args.input
+input_directory = args.in
+
+#check if input is directory
+if os.path.isdir(input_directory):
+	print('input is directory: continue') 
+else:
+	print('%r is not a directory. Please use directory as input.' % input_directory)
+	sys.exit()
 
 species_file = os.path.join(scriptlocation, "specieslist.txt")
 df_species = pd.read_csv(species_file, header=None, sep=' ', names = ['species', 'level'] )
@@ -46,7 +53,6 @@ if args.specieslist:
 	sys.exit()
 
 #check if species exist in list
-print('check if species classification scheme exist')
 if args.species in species_list:
 	print('species exist; continue')
 else:
@@ -54,7 +60,7 @@ else:
 	print('Available species: \n{}'.format(df_species.species.to_csv(index=False)))
 	sys.exit()
 
-print('Start plasmid prediction, version 0.0')	
+print('Start plasmid prediction, version 0.0.8')	
 	
 #make output folder	
 if args.out:
@@ -197,13 +203,14 @@ if args.jelly:
 		basename = os.path.splitext(os.path.basename(fasta_file))[0]
 		for record in SeqIO.parse(fasta_file,"fasta"):
 			id = record.id
-			id_file = basename + '_' + id
+			id_file = basename + '_' + id + '.fasta'
 			with open (os.path.join(kmer_dir, id_file), 'w') as out:
 				out.write('>'+record.id+'\n'+str(record.seq + 'NN' + record.seq.reverse_complement() + '\n'))
 	os.chdir(kmer_dir)
-	os.system('ls * |while read file ; do cat $file  | jellyfish count /dev/fd/0  -m 5   -c 20 -s 1000000 -t 16 -o /dev/fd/1 |jellyfish dump -c -t /dev/fd/0 |while read kmer ; do echo $file $kmer ; done ; done > ../kmers.out')
+	for split_fasta in glob.glob('*.fasta'):
+		basename = os.path.splitext(os.path.basename(split_fasta))[0]
+		os.system('cat {} | jellyfish count /dev/fd/0 -m 5 -c 20 -s 1000000 -t 16 -o /dev/fd/1 |jellyfish dump -c -t /dev/fd/0 |while read kmer ; do echo {} $kmer ; done >> ../kmers.out'.format(split_fasta, basename))
 	os.chdir("../")
-#	shutil.rmtree(kmer_dir)
 	print('Jellyfish kmer-count done')
 if not (args.jelly):
 	print('Standard kmer-counting method')
