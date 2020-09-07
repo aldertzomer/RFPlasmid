@@ -32,6 +32,11 @@ args = parser.parse_args()
 species_import = args.species	
 input_directory = args.input
 
+if len(sys.argv) <= 1:
+	print("Error; no arguments")
+	parser.print_help(sys.stderr)
+	sys.exit()
+
 #check if input is directory
 if os.path.isdir(input_directory):
 	print('input is directory: continue') 
