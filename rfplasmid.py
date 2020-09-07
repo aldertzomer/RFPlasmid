@@ -65,7 +65,7 @@ else:
 	print('Available species: \n{}'.format(df_species.species.to_csv(index=False)))
 	sys.exit()
 
-print('Start plasmid prediction, version 0.0.9')	
+print('Start RFPlasmid, version 0.0.11')	
 	
 #make output folder	
 if args.out:
