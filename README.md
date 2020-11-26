@@ -152,8 +152,9 @@ $ sudo chmod +x /usr/local/bin/jellyfish
 
 The file  prediction.csv contains the contig number (column 1), the prediction wether it's chromosomal or plasmid (column 2), the votes for chromosome or plasmids (columns 3 and 4, and the original contig ID. 
 
-contig|prediction|votes chromosomal|votes plasmid|contigID
-Kp1_ctg1_1|p|0.100|0.900|Kp1_ctg1
+|contig|prediction|votes chromosomal|votes plasmid|contigID|
+| --------- | ----------- |
+|Kp1_ctg1_1|p|0.100|0.900|Kp1_ctg1|
 
 
 ## Training data
