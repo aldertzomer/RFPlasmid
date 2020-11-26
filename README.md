@@ -157,15 +157,32 @@ The file  prediction.csv contains the contig number (column 1), the prediction w
 | Kp1_ctg1_1 | p | 0.100 | 0.900 | Kp1_ctg1 |
 
 
-The file  prediction_full.csv contains the contig number (column 1), the prediction wether it's chromosomal or plasmid (column 2), the votes for chromosome or plasmids (columns 3 and 4, and the original contig ID (column 5). 
+The file  prediction_full.csv contains the data as before, but also includes the input data.
 
-| Contig | Prediction | Votes chromosomal | Votes plasmid | ContigID | genome | contig_length | SCM_genes | plasmid_genes_genes | plasmidcge_id | kmer_number | SCM | plasmid_genes | kmer1-1024 |
+| Contig     | prediction | Votes chromosomal | Votes plasmid | contigID | Genome | contig length | % SCM | % plasmid genes | %ID plasmidfinder | Number of kmers | SCM genes | plasmid genes | kmer fractions | etc |
+|------------|------------|-------------------|---------------|----------|--------|---------------|-------|-----------------|-------------------|-----------------|-----------|---------------|----------------|-----|
+| Kp1_ctg1_1 | p          | 0.101             | 0.899         | Kp1_ctg1 | Kp1    | 50000         | 0.12  | 0.51            | 69.5              | 138845          | 12        | 32            | 0.01477        |     |
+|            |            |                   |               |          |        |               |       |                 |                   |                 |           |               |                |     |
 
-| --------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
-| Kp1_ctg1_1 | p | 0.100 | 0.900 | Kp1_ctg1 |
+All headers are explained below
 
-
-
+| Header              | Header contents   | Explanation                                                                                                                |
+|---------------------|-------------------|----------------------------------------------------------------------------------------------------------------------------|
+|                     | Contig            | Contig number                                                                                                              |
+| prediction          | prediction        | Plasmid or chromosome                                                                                                      |
+| votes chromosomal   | Votes chromosomal | Random forest votes for the chromosome class (0-1)                                                                         |
+| votes plasmid       | Votes plasmid     | Random forest votes for the plasmid class (0-1)                                                                            |
+| contigID            | contigID          | Original contig ID                                                                                                         |
+| genome              | Genome            | Name of genome                                                                                                             |
+| contig_length       | contig length     | length of contig in bases                                                                                                  |
+| SCM_genes           | % SCM             | Percentage of genes that is classified as chromosomal marker gene based   on CheckM                                        |
+| plasmid_genes_genes | % plasmid genes   | Percentage of genes that is classified as chromosomal marker gene based   on alignment against a plasmid proteins database |
+| plasmidcge_id       | %ID plasmidfinder | Highest identity percentage of hits against the PlasmidFinder database                                                     |
+| kmer_number         | Number of kmers   | Number of kmers in the contig                                                                                              |
+| SCM                 | SCM genes         | Number of genes that is classified as chromosomal marker gene based on   CheckM                                            |
+| plasmid_genes       | plasmid genes     | Number of genes that is classified as chromosomal marker gene based on   alignment against a plasmid proteins database     |
+| kmer1               | kmer fractions    | Fractions of the 1024 4-mers from AAAA to TTTTT                                                                            |
+| etc                 |                   |                                                                                                                            |
 
 ## Training data
 Plasmid databases can be downloaded from: http://klif.uu.nl/download/plasmid_db/
