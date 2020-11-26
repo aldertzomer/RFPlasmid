@@ -1,4 +1,4 @@
-## RFPlasmid
+# RFPlasmid
 Predicting plasmid contigs from assemblies using single copy marker genes, plasmid genes, kmers
 
 Linda van der Graaf-van Bloois, Jaap Wagenaar, Aldert Zomer
@@ -32,7 +32,7 @@ data of bacterial genomes and their antimicrobial resistance genes.
 
 A web-interface to test single fasta files is available here: http://klif.uu.nl/rfplasmid/
 
-Getting the software:
+## Getting the software:
 
 Using pip. Installs most dependancies as well except DIAMOND and JellyFish (see below). Be aware that you may need to download additional databases for CheckM. 
 ```
@@ -81,7 +81,7 @@ $ cp jellyfish-linux ~/bin/jellyfish
 $ sudo chmod +x ~/bin/jellyfish
 ```
 
-Usage: 
+## Usage: 
 ```
 $ python3 rfplasmid.py [-h] --species SPECIES --input INPUT
                                    [--training] [--specieslist] [--jelly]
@@ -97,8 +97,8 @@ A folder containing .fasta file is required as input.
 
 Read specieslist.txt for species specific models. We have a general Enterobacteriaceae model instead of a species model. All others are species except for the "Bacteria" model which can be used for unknown or metagenomics samples.
 
-
-Only if you are a system administrator! Include sudo if doing a systemwide install. 
+## Systemwide install
+Only if you are a system administrator and you know what you are doing. 
 ```
 $ sudo pip3 install rfplasmid
 $ sudo rfplasmid # Should install the databases as well provided all requirements are met
@@ -137,8 +137,6 @@ $ wget https://github.com/gmarcais/Jellyfish/releases/download/v2.2.10/jellyfish
 $ sudo cp jellyfish-linux /usr/local/bin/jellyfish
 $ sudo chmod +x /usr/local/bin/jellyfish
 ```
-
-
 
 Plasmid databases can be downloaded from: http://klif.uu.nl/download/plasmid_db/
 
