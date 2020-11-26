@@ -157,6 +157,16 @@ The file  prediction.csv contains the contig number (column 1), the prediction w
 | Kp1_ctg1_1 | p | 0.100 | 0.900 | Kp1_ctg1 |
 
 
+The file  prediction_full.csv contains the contig number (column 1), the prediction wether it's chromosomal or plasmid (column 2), the votes for chromosome or plasmids (columns 3 and 4, and the original contig ID (column 5). 
+
+| Contig | Prediction | Votes chromosomal | Votes plasmid | ContigID | genome | contig_length | SCM_genes | plasmid_genes_genes | plasmidcge_id | kmer_number | SCM | plasmid_genes | kmer1-1024 |
+
+| --------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
+| Kp1_ctg1_1 | p | 0.100 | 0.900 | Kp1_ctg1 |
+
+
+
+
 ## Training data
 Plasmid databases can be downloaded from: http://klif.uu.nl/download/plasmid_db/
 Data used for training can be downloaded here: http://klif.uu.nl/download/plasmid_db/trainingsets2/
