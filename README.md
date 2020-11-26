@@ -39,7 +39,7 @@ $ cd RFPlasmid
 $ bash getdb.sh # downloads and formats the plasmid DBs
 ```
 
-For quick install.
+Alternatively if you are more comfortable with pip. Installs most dependancies as well except DIAMOND and JellyFish. Be aware that you may need to download additional databases for CheckM. 
 ```
 $  pip3 install rfplasmid
 $  rfplasmid
