@@ -34,7 +34,7 @@ A web-interface to test single fasta files is available here: http://klif.uu.nl/
 
 ## Getting the software:
 
-Using pip. Installs most dependancies as well except DIAMOND and JellyFish (see below). Be aware that you may need to download additional databases for CheckM. 
+Using pip. Installs most dependancies as well except DIAMOND and JellyFish and R (see below). Be aware that you may need to download additional databases for CheckM. 
 ```
 $  pip3 install rfplasmid
 $  rfplasmid
