@@ -39,13 +39,13 @@ data of bacterial genomes and their antimicrobial resistance genes.
 
 ## Getting the software:
 
-Using pip. Installs most dependancies as well except DIAMOND and JellyFish and R (see below). Be aware that you may need to download additional databases for CheckM. 
+Using pip. Installs most requirements except DIAMOND and JellyFish and R (see below). Be aware that you may need to download additional databases for CheckM. 
 ```
 $  pip3 install rfplasmid
 $  rfplasmid
 ```
 
-Using git
+Alternatively using git. You will need to install the requirements as well
 ```
 $ git clone https://github.com/aldertzomer/RFPlasmid.git
 $ cd RFPlasmid
