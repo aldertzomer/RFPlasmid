@@ -78,7 +78,7 @@ Strongly recommended: Jellyfish ( http://www.genome.umd.edu/jellyfish.html )
 ```
 $ wget https://github.com/gmarcais/Jellyfish/releases/download/v2.2.10/jellyfish-linux
 $ cp jellyfish-linux ~/bin/jellyfish
-$ sudo chmod +x ~/bin/jellyfish
+$ chmod +x ~/bin/jellyfish
 ```
 
 ## Usage: 
