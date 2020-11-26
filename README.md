@@ -33,44 +33,21 @@ data of bacterial genomes and their antimicrobial resistance genes.
 A web-interface to test single fasta files is available here: http://klif.uu.nl/rfplasmid/
 
 Getting the software:
+
+Using pip. Installs most dependancies as well except DIAMOND and JellyFish (see below). Be aware that you may need to download additional databases for CheckM. 
+```
+$  pip3 install rfplasmid
+$  rfplasmid
+```
+
+Using git
 ```
 $ git clone https://github.com/aldertzomer/RFPlasmid.git
 $ cd RFPlasmid
 $ bash getdb.sh # downloads and formats the plasmid DBs
 ```
 
-Alternatively if you are more comfortable with pip. Installs most dependancies as well except DIAMOND and JellyFish. Be aware that you may need to download additional databases for CheckM. 
-```
-$  pip3 install rfplasmid
-$  rfplasmid
-```
-
-Usage: 
-```
-$ python3 rfplasmid.py [-h] --species SPECIES --input INPUT
-                                   [--training] [--specieslist] [--jelly]
-                                   [--out OUT] [--debug] [--threads THREADS]
-# example
-python3 rfplasmid.py --species Campylobacter --input example --jelly --threads 8 --out output
-# compare output with the folder example_out
-```
-
-A folder containing .fasta file is required as input.
-
---jelly requires a functional jellyfish install. Greatly speeds up the analysis. Strongly recommended as our kmer profiling method in Python is slow
-
-Read specieslist.txt for species specific models. We have a general Enterobacteriaceae model instead of a species model. All others are species except for the "Bacteria" model which can be used for unknown or metagenomics samples.
-
-
-Only if you are a system administrator! Include sudo if doing a systemwide install. 
-```
-$ sudo pip3 install rfplasmid
-$ sudo rfplasmid # Should install the databases as well provided all requirements are met
-```
-
-
-
-Requirements. Assumes you have ~/bin/ in your PATH. Depending on your setup you may need to follow the systemwide version (see below)
+Installing requirements. Assumes you have ~/bin/ in your PATH. Depending on your setup you may need to follow the systemwide version (see further below)
 
 Python 3 with pandas ( https://pandas.pydata.org/)
 ```
@@ -104,6 +81,28 @@ $ cp jellyfish-linux ~/bin/jellyfish
 $ sudo chmod +x ~/bin/jellyfish
 ```
 
+Usage: 
+```
+$ python3 rfplasmid.py [-h] --species SPECIES --input INPUT
+                                   [--training] [--specieslist] [--jelly]
+                                   [--out OUT] [--debug] [--threads THREADS]
+# example
+python3 rfplasmid.py --species Campylobacter --input example --jelly --threads 8 --out output
+# compare output with the folder example_out
+```
+
+A folder containing .fasta file is required as input.
+
+--jelly requires a functional jellyfish install. Greatly speeds up the analysis. Strongly recommended as our kmer profiling method in Python is slow
+
+Read specieslist.txt for species specific models. We have a general Enterobacteriaceae model instead of a species model. All others are species except for the "Bacteria" model which can be used for unknown or metagenomics samples.
+
+
+Only if you are a system administrator! Include sudo if doing a systemwide install. 
+```
+$ sudo pip3 install rfplasmid
+$ sudo rfplasmid # Should install the databases as well provided all requirements are met
+```
 
 Requirements if you want to install the requirements systemwide. Let your system administrator do this. 
 
