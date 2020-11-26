@@ -138,6 +138,24 @@ $ sudo cp jellyfish-linux /usr/local/bin/jellyfish
 $ sudo chmod +x /usr/local/bin/jellyfish
 ```
 
-Plasmid databases can be downloaded from: http://klif.uu.nl/download/plasmid_db/
+## Output Files
 
+| File | Description |
+| --------- | ----------- |
+| prediction.csv | This is the primary output as comma delimited file. c = chromosome, p=plasmid. |
+| prediction_full.csv | This is the primary output as comma delimited file including all input data. |
+| classification.RData | The R object containing input and output. |
+| outputdataframe.csv | Output from the various scripts used as input by the randomForest classifier. |
+| other files | Temporary input files. Can be safely removed. |
+
+## Output explained
+
+The file  prediction.csv contains the contig number (column 1), the prediction wether it's chromosomal or plasmid (column 2), the votes for chromosome or plasmids (columns 3 and 4, and the original contig ID. 
+
+contig|prediction|votes chromosomal|votes plasmid|contigID
+Kp1_ctg1_1|p|0.100|0.900|Kp1_ctg1
+
+
+## Training data
+Plasmid databases can be downloaded from: http://klif.uu.nl/download/plasmid_db/
 Data used for training can be downloaded here: http://klif.uu.nl/download/plasmid_db/trainingsets2/
