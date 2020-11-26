@@ -1,7 +1,11 @@
 # RFPlasmid
+Predicting plasmid contigs from assemblies
 
 ## Webinterface
+
 A web-interface to test single fasta files is available here: http://klif.uu.nl/rfplasmid/
+
+## Abstract
 
 Predicting plasmid contigs from assemblies using single copy marker genes, plasmid genes, kmers
 Linda van der Graaf-van Bloois, Jaap Wagenaar, Aldert Zomer
