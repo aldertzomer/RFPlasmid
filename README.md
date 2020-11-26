@@ -159,14 +159,14 @@ The file  prediction.csv contains the contig number (column 1), the prediction w
 
 | Contig | Prediction | Votes chromosomal | Votes plasmid | ContigID |
 | --------- | ----------- | ----------- | ----------- | ----------- |
-| Kp1_ctg1_1 | p | 0.100 | 0.900 | Kp1_ctg1 |
+| Kp1_1 | p | 0.100 | 0.900 | Kp1_ctg1 |
 
 
 The file  prediction_full.csv contains the data as before, but also includes the input data.
 
 | Contig     | prediction | Votes chromosomal | Votes plasmid | contigID | Genome | contig length | % SCM | % plasmid genes | %ID plasmidfinder | Number of kmers | SCM genes | plasmid genes | kmer fractions | etc |
 |------------|------------|-------------------|---------------|----------|--------|---------------|-------|-----------------|-------------------|-----------------|-----------|---------------|----------------|-----|
-| Kp1_ctg1_1 | p          | 0.101             | 0.899         | Kp1_ctg1 | Kp1    | 50000         | 0.12  | 0.51            | 69.5              | 138845          | 12        | 32            | 0.01477        |     |
+| Kp1_1 | p          | 0.101             | 0.899         | Kp1_ctg1 | Kp1    | 50000         | 0.12  | 0.51            | 69.5              | 138845          | 12        | 32            | 0.01477        |     |
 |            |            |                   |               |          |        |               |       |                 |                   |                 |           |               |                |     |
 
 All headers are explained below
