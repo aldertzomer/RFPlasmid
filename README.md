@@ -1,6 +1,9 @@
 # RFPlasmid
-Predicting plasmid contigs from assemblies using single copy marker genes, plasmid genes, kmers
 
+## Webinterface
+A web-interface to test single fasta files is available here: http://klif.uu.nl/rfplasmid/
+
+Predicting plasmid contigs from assemblies using single copy marker genes, plasmid genes, kmers
 Linda van der Graaf-van Bloois, Jaap Wagenaar, Aldert Zomer
 
 Introduction: 
@@ -29,8 +32,6 @@ both plasmid and chromosome, e.g. transposases.
 Conclusion: The newly developed tool is able to determine if contigs are chromosomal or plasmid
 with a very high specificity and sensitivity (up to 99%) and can be very useful to analyze WGS
 data of bacterial genomes and their antimicrobial resistance genes.
-
-A web-interface to test single fasta files is available here: http://klif.uu.nl/rfplasmid/
 
 ## Getting the software:
 
