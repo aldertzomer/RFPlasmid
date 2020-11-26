@@ -32,19 +32,86 @@ data of bacterial genomes and their antimicrobial resistance genes.
 
 A web-interface to test single fasta files is available here: http://klif.uu.nl/rfplasmid/
 
-For quick install. Omit sudo if doing a local install
+Getting the software:
+```
+$ git clone https://github.com/aldertzomer/RFPlasmid.git
+$ cd RFPlasmid
+$ bash getdb.sh # downloads and formats the plasmid DBs
+```
+
+For quick install.
+```
+$  pip3 install rfplasmid
+$  rfplasmid
+```
+
+Usage: 
+```
+$ python3 rfplasmid.py [-h] --species SPECIES --input INPUT
+                                   [--training] [--specieslist] [--jelly]
+                                   [--out OUT] [--debug] [--threads THREADS]
+# example
+python3 rfplasmid.py --species Campylobacter --input example --jelly --threads 8 --out output
+# compare output with the folder example_out
+```
+
+A folder containing .fasta file is required as input.
+
+--jelly requires a functional jellyfish install. Greatly speeds up the analysis. Strongly recommended as our kmer profiling method in Python is slow
+
+Read specieslist.txt for species specific models. We have a general Enterobacteriaceae model instead of a species model. All others are species except for the "Bacteria" model which can be used for unknown or metagenomics samples.
+
+
+Only if you are a system administrator! Include sudo if doing a systemwide install. 
 ```
 $ sudo pip3 install rfplasmid
 $ sudo rfplasmid # Should install the databases as well provided all requirements are met
 ```
 
-Requirements
+
+
+Requirements. Assumes you have ~/bin/ in your PATH. Depending on your setup you may need to follow the systemwide version (see below)
+
+Python 3 with pandas ( https://pandas.pydata.org/)
+```
+$  pip3 install pandas
+```
+CheckM ( https://ecogenomics.github.io/CheckM/ ). According to the github page of CheckM:
+```
+$  pip3 install numpy
+$  pip3 install scipy
+$  pip3 install pysam
+$  pip3 install checkm-genome
+```
+
+RandomForest package in R ( https://cran.r-project.org/web/packages/randomForest/index.html )
+```
+$  R
+> install.packages("randomForest")
+```
+
+DIAMOND ( https://github.com/bbuchfink/diamond )
+```
+$ wget http://github.com/bbuchfink/diamond/releases/download/v0.9.24/diamond-linux64.tar.gz
+$ tar xzf diamond-linux64.tar.gz
+$ cp diamond ~/bin/diamond
+```
+
+Strongly recommended: Jellyfish ( http://www.genome.umd.edu/jellyfish.html )
+```
+$ wget https://github.com/gmarcais/Jellyfish/releases/download/v2.2.10/jellyfish-linux
+$ cp jellyfish-linux ~/bin/jellyfish
+$ sudo chmod +x ~/bin/jellyfish
+```
+
+
+Requirements if you want to install the requirements systemwide. Let your system administrator do this. 
 
 Python 3 with pandas ( https://pandas.pydata.org/)
 ```
 $ sudo pip3 install pandas
 ```
-CheckM ( https://ecogenomics.github.io/CheckM/ )
+CheckM ( https://ecogenomics.github.io/CheckM/ ). According to the github page of CheckM:
 ```
 $ sudo pip3 install numpy
 $ sudo pip3 install scipy
@@ -72,28 +139,7 @@ $ sudo cp jellyfish-linux /usr/local/bin/jellyfish
 $ sudo chmod +x /usr/local/bin/jellyfish
 ```
 
-Getting the software:
-```
-$ git clone https://github.com/aldertzomer/RFPlasmid.git
-$ cd RFPlasmid
-$ bash getdb.sh # downloads and formats the plasmid DBs
-```
 
-Usage: 
-```
-$ python3 rfplasmid.py [-h] --species SPECIES --input INPUT
-                                   [--training] [--specieslist] [--jelly]
-                                   [--out OUT] [--debug] [--threads THREADS]
-# example
-python3 rfplasmid.py --species Campylobacter --input example --jelly --threads 8 --out output
-# compare output with the folder example_out
-```
-
-A folder containing .fasta file is required as input.
-
---jelly requires a functional jellyfish install. Greatly speeds up the analysis. Strongly recommended as our kmer profiling method in Python is slow
-
-Read specieslist.txt for species specific models. We have a general Enterobacteriaceae model instead of a species model. All others are species except for the "Bacteria" model which can be used for unknown or metagenomics samples.
 
 Plasmid databases can be downloaded from: http://klif.uu.nl/download/plasmid_db/
 
