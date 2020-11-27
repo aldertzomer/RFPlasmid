@@ -189,6 +189,48 @@ All headers are explained below
 | kmer1               | kmer fractions    | Fractions of the 1024 4-mers from AAAA to TTTTT                                                                            |
 | etc                 |                   |                                                                                                                            |
 
+## Training your own model
+
+RFPlasmid comes with an option to train your own model if you provide it with contigs of chromosomes and plasmids. The following steps will generate the model for you and make it available for your RFplasmid installation. We will use the genus Lactococcus as an example.
+
+The following steps need to be taken.
+1. Get and install RFPlasmid from Github
+2. Prepare a folder containing your plasmid contigs and your chromosome contigs. Draft genome assemblies are highly recommended, don't use completed genomes, as your input also won't be completed genomes. Make sure that the plasmid contig file(s) start with "p" and the file(s) with the chromosomal contigs start with "c". In the example called them plasmids.fasta and chromosomes.fasta, but as long as the files start with p or c your are good. They may also be separate files per genome/plasmid. You need about 20 plasmids and 20 chromosomes for a decent classification.
+3. Add the name of your genus/family/etc to specieslist.txt. Use the name exactly as it is listed in CheckM for the appropriate taxon level. It is not recommended to use a species level model, else you will have to deal with spaces in names. Use only genus level or higher. 
+4. Run RFplasmid in training mode
+5. Move the resulting training.rfo R object in the output folder to the RFplasmid folder and name it appropriately 
+6. Test your new plasmid prediction model
+
+Below an example of the commands. Replace Lactococcus with the genus of interest and ofcourse change "/mnt/data/files" to the folder containing the input
+```
+$ git clone https://github.com/aldertzomer/RFPlasmid.git
+$ cd RFPlasmid
+$ bash getdb.sh
+$ mkdir Lactococcus
+$ cat /mnt/data/files/p*.fasta > Lactococcus/plasmids.fasta
+$ cat /mnt/data/files/c*.fasta > Lactococcus/chromosomes.fasta
+$ checkm taxon_list |grep Lactococcus
+$ echo "Lactococcus genus" >> specieslist.txt # this is important. Don't skip this step.
+$ python3 rfplasmid.py --training --jelly --input Lactococcus --threads 16 --out Lactococcus.out --species Lactococcus
+$ cp Lactococcus.out/training.rfo Lactococcus.rfo
+```
+
+It is recommended to load the object in R and explore it to check how well it performs using the OOB output.
+
+```
+$ R
+> library(randomForest)
+> load("Lactococcus.rfo")
+> rf$OOB
+```
+
+
+Test your model using 
+
+```
+python3 rfplasmid.py --jelly --input Lactococcus --threads 16 --out Lactococcus.out2 --species Lactococcus
+```
+
 ## Training data
 Plasmid databases can be downloaded from: http://klif.uu.nl/download/plasmid_db/
 Data used for training can be downloaded here: http://klif.uu.nl/download/plasmid_db/trainingsets2/
