@@ -221,7 +221,7 @@ It is recommended to load the object in R and explore it to check how well it pe
 $ R
 > library(randomForest)
 > load("Lactococcus.rfo")
-> rf$OOB
+> rf
 ```
 
 
