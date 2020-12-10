@@ -217,7 +217,7 @@ $ python3 rfplasmid.py --training --jelly --input Lactococcus --threads 16 --out
 $ cp Lactococcus.out/training.rfo Lactococcus.rfo
 ```
 
-It is recommended to load the object in R and explore it to check how well it performs using the OOB output.
+It is recommended to load the object in R and explore it to check how well it performs using the OOB output and the confusion matrix. Generally you want to have the number of chromosome contigs that are predicted as being plasmid contigs as low as possible. It is also recommended to check the sizes of the contigs that are incorrectly predicted, as contigs <1 kb are more difficult to predict and at some point no improvements are possible. Modifying the ratio of the contigs sampled in the sampsize option in the training.R script may push the values to more chromosomal or plasmid contigs correctly predicted. In all our models the ratio was kept 1:1. 
 
 ```
 $ R
