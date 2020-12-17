@@ -23,7 +23,7 @@ parser.add_argument("--species", help="define species (required)", required=('--
 parser.add_argument("--input", help="directory with input fasta files (required)", required=('--species') in sys.argv and len(sys.argv) != 1)
 parser.add_argument("--specieslist", help="list of available species models", action="store_true", default=False)
 parser.add_argument("--jelly", help="run jellyfish as kmer-count (faster)", action="store_true", default=False)
-parser.add_argument("--out", help="specify output directory", action="store_true", default=False)
+parser.add_argument("--out", help="specify output directory", default=False)
 parser.add_argument("--debug", help="no cleanup of intermediate files", action="store_true", default=False)
 parser.add_argument("--training", help="trainings mode Random Forest", action="store_true", default=False)
 parser.add_argument("--threads", help="specify number of threads to be used, default is max available threads up to 16 threads", default=cpu_threads(16), type=int)
@@ -35,7 +35,7 @@ input_directory = args.input
 
 # version
 if args.version:
-    print('RFPlasmid version 0.0.12')
+    print('RFPlasmid version 0.0.15')
     sys.exit()
 
 species_file = os.path.join(scriptlocation, "specieslist.txt")
@@ -67,7 +67,7 @@ if not args.species in species_list:
     print('Available species models: \n{}'.format(df_species.species.to_csv(index=False, header=False)))
     sys.exit()
 
-print('Start RFPlasmid, version 0.0.12')
+print('Start RFPlasmid, version 0.0.15')
 
 # make output folder
 if args.out:
