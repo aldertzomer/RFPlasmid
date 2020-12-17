@@ -44,6 +44,8 @@ data of bacterial genomes and their antimicrobial resistance genes.
 Using pip. Installs most requirements except DIAMOND and JellyFish and R (see below). Be aware that you may need to download additional databases for CheckM. 
 ```
 $  pip3 install rfplasmid
+$  export PATH=$PATH:~/.local/bin # pip installs in ~/.local/bin and it should be in your path but some distros don't have this set 
+$  rfplasmid --initialize #We makes use of a bash helper script to locate the rfplasmid.py file and to download the plasmid files
 $  rfplasmid
 ```
 
@@ -52,6 +54,7 @@ Alternatively using git. You will need to install the requirements as well
 $ git clone https://github.com/aldertzomer/RFPlasmid.git
 $ cd RFPlasmid
 $ bash getdb.sh # downloads and formats the plasmid DBs
+$ python3 rfplasmid.py
 ```
 
 Installing requirements. Assumes you have ~/bin/ in your PATH. Depending on your setup you may need to follow the systemwide version (see further below)
@@ -108,7 +111,8 @@ Read specieslist.txt for species specific models. We have a general Enterobacter
 Only if you are a system administrator and you know what you are doing. 
 ```
 $ sudo pip3 install rfplasmid
-$ sudo rfplasmid # Should install the databases as well provided all requirements are met
+$ sudo rfplasmid --initialize # Should install the databases as well provided all requirements are met
+$ rfplasmid
 ```
 
 Requirements if you want to install the requirements systemwide. Let your system administrator do this. 
@@ -122,7 +126,7 @@ CheckM ( https://ecogenomics.github.io/CheckM/ ). According to the github page o
 $ sudo pip3 install numpy
 $ sudo pip3 install scipy
 $ sudo pip3 install pysam
-$ sudo pip3 install checkm-genome
+$ sudo pip3 install checkm-genome #install the CheckM databases as well. See the CheckM page
 ```
 
 RandomForest package in R ( https://cran.r-project.org/web/packages/randomForest/index.html )
