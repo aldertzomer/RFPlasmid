@@ -41,15 +41,56 @@ data of bacterial genomes and their antimicrobial resistance genes.
 
 ## Getting the software:
 
-Using pip. Installs most requirements except DIAMOND and JellyFish and R (see below). Be aware that you may need to download additional databases for CheckM. 
+Using Conda (thanks to https://github.com/rpetit3 )
+```
+conda create -n rfplasmid -c conda-forge -c bioconda rfplasmid
+```
+
+Using Pip. Installs most requirements except DIAMOND and JellyFish and R (see below). You need to download additional databases for CheckM if you have never installed it. 
+
 ```
 $  pip3 install rfplasmid
-$  export PATH=$PATH:~/.local/bin # pip installs in ~/.local/bin and it should be in your path but some distros don't have this set 
+$  export PATH=$PATH:~/.local/bin # pip installs in ~/.local/bin and it should be in your path but some distros don't have this set (even though they should).
 $  rfplasmid --initialize #We makes use of a bash helper script to locate the rfplasmid.py file and to download the plasmid files
 $  rfplasmid
 ```
 
-Alternatively using git. You will need to install the requirements as well
+### Optional if you have never installed CheckM before: 
+
+CheckM relies on a number of precalculated data files which can be downloaded from https://data.ace.uq.edu.au/public/CheckM_databases/. Decompress the file to an appropriate folder and run the following to inform CheckM of where the files have been placed. The example below uses wget to download the an archive of file and installs them in your homedir.
+```
+$  cd ~
+$  mkdir checkm_data
+$  cd checkm_data
+$  wget https://data.ace.uq.edu.au/public/CheckM_databases/checkm_data_2015_01_16.tar.gz
+$  tar xzvf checkm_data_2015_01_16.tar.gz
+$  checkm data setRoot ~/checkm_data
+```
+
+### Dependencies you need to install 
+RandomForest package in R ( https://cran.r-project.org/web/packages/randomForest/index.html ) (likely already installed). 
+```
+$  R
+> install.packages("randomForest")
+```
+
+DIAMOND ( https://github.com/bbuchfink/diamond ) 
+```
+$ wget http://github.com/bbuchfink/diamond/releases/download/v0.9.24/diamond-linux64.tar.gz
+$ tar xzf diamond-linux64.tar.gz
+$ cp diamond ~/bin/diamond
+```
+
+Strongly recommended: Jellyfish ( http://www.genome.umd.edu/jellyfish.html )
+```
+$ wget https://github.com/gmarcais/Jellyfish/releases/download/v2.2.10/jellyfish-linux
+$ cp jellyfish-linux ~/bin/jellyfish
+$ chmod +x ~/bin/jellyfish
+```
+
+### This is for advanced users. 
+
+You can get the source and using git and run from the folder you downloaded it to. You will need to install the requirements by hand as well
 ```
 $ git clone https://github.com/aldertzomer/RFPlasmid.git
 $ cd RFPlasmid
@@ -69,6 +110,12 @@ $  pip3 install numpy
 $  pip3 install scipy
 $  pip3 install pysam
 $  pip3 install checkm-genome
+$  cd ~
+$  mkdir checkm_data
+$  cd checkm_data
+$  wget https://data.ace.uq.edu.au/public/CheckM_databases/checkm_data_2015_01_16.tar.gz
+$  tar xzvf checkm_data_2015_01_16.tar.gz
+$  checkm data setRoot ~/checkm_data
 ```
 
 RandomForest package in R ( https://cran.r-project.org/web/packages/randomForest/index.html )
