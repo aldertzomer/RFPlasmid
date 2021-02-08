@@ -43,7 +43,7 @@ data of bacterial genomes and their antimicrobial resistance genes.
 
 Using Conda (thanks to https://github.com/rpetit3 )
 ```
-conda create -n rfplasmid -c conda-forge -c bioconda rfplasmid
+conda install -c bioconda rfplasmid
 ```
 
 Using Pip. Installs most requirements except DIAMOND and JellyFish and R (see below). You need to download additional databases for CheckM if you have never installed it. 
