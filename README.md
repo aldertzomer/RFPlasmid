@@ -39,9 +39,27 @@ Conclusion: The newly developed tool is able to determine if contigs are chromos
 with a very high specificity and sensitivity (up to 99%) and can be very useful to analyze WGS
 data of bacterial genomes and their antimicrobial resistance genes.
 
+## Running RFPlasmid
+
+```
+$ rfplasmid --initialize # Only once after installing it. See "Getting the software" below
+$ rfplasmid [-h] --species SPECIES --input INPUT
+                                   [--training] [--specieslist] [--jelly]
+                                   [--out OUT] [--debug] [--threads THREADS]
+# example
+rfplasmid --species Campylobacter --input example --jelly --threads 8 --out output
+# compare output with the folder example_out
+```
+A folder containing .fasta file is required as input.
+
+--jelly requires a functional jellyfish install. Greatly speeds up the analysis. Strongly recommended as our kmer profiling method in Python is slow
+
+Read specieslist.txt for species specific models. We have a general Enterobacteriaceae model instead of a species model. All others are species except for the "Bacteria" model which can be used for unknown or metagenomics samples.
+
 ## Getting the software:
 
-Using Conda (thanks to https://github.com/rpetit3 )
+### Using Conda 
+thanks to https://github.com/rpetit3. Installs CheckM database as well.
 ```
 $ conda create -n rfplasmid -c conda-forge -c bioconda rfplasmid
 $ conda activate rfplasmid
@@ -49,7 +67,8 @@ $ rfplasmid --initialize #We makes use of a bash helper script to locate the rfp
 $ rfplasmid
 ```
 
-Using Pip. Installs most requirements except DIAMOND and JellyFish and R (see below). You need to download additional databases for CheckM if you have never installed it. 
+### Using Pip. 
+Installs most requirements except DIAMOND and JellyFish and R (see below). You need to download additional databases for CheckM if you have never installed it. 
 
 ```
 $  pip3 install rfplasmid
@@ -74,7 +93,7 @@ $  checkm data setRoot ~/checkm_data
 RandomForest package in R ( https://cran.r-project.org/web/packages/randomForest/index.html ) (likely already installed). 
 ```
 $  R
-> install.packages("randomForest")
+> install.packages("randomForest") #likely also already installed
 ```
 
 DIAMOND ( https://github.com/bbuchfink/diamond ) 
@@ -140,22 +159,6 @@ $ wget https://github.com/gmarcais/Jellyfish/releases/download/v2.2.10/jellyfish
 $ cp jellyfish-linux ~/bin/jellyfish
 $ chmod +x ~/bin/jellyfish
 ```
-
-## Usage: 
-```
-$ python3 rfplasmid.py [-h] --species SPECIES --input INPUT
-                                   [--training] [--specieslist] [--jelly]
-                                   [--out OUT] [--debug] [--threads THREADS]
-# example
-python3 rfplasmid.py --species Campylobacter --input example --jelly --threads 8 --out output
-# compare output with the folder example_out
-```
-
-A folder containing .fasta file is required as input.
-
---jelly requires a functional jellyfish install. Greatly speeds up the analysis. Strongly recommended as our kmer profiling method in Python is slow
-
-Read specieslist.txt for species specific models. We have a general Enterobacteriaceae model instead of a species model. All others are species except for the "Bacteria" model which can be used for unknown or metagenomics samples.
 
 ## Systemwide install
 Only if you are a system administrator and you know what you are doing. 
