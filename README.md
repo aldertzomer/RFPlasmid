@@ -103,7 +103,7 @@ $  tar xzvf checkm_data_2015_01_16.tar.gz
 $  checkm data setRoot ~/checkm_data
 ```
 
-### Dependencies you need to install when installing it using pip
+### Dependencies you need to install when installing RFPlasmid using Pip
 RandomForest package in R ( https://cran.r-project.org/web/packages/randomForest/index.html ) (likely already installed). 
 ```
 $  R
