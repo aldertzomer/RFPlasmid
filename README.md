@@ -43,7 +43,9 @@ data of bacterial genomes and their antimicrobial resistance genes.
 
 Using Conda (thanks to https://github.com/rpetit3 )
 ```
-conda create -n rfplasmid -c conda-forge -c bioconda rfplasmid
+$ conda create -n rfplasmid -c conda-forge -c bioconda rfplasmid
+$ conda activate rfplasmid
+$ rfplasmid
 ```
 
 Using Pip. Installs most requirements except DIAMOND and JellyFish and R (see below). You need to download additional databases for CheckM if you have never installed it. 
@@ -51,7 +53,7 @@ Using Pip. Installs most requirements except DIAMOND and JellyFish and R (see be
 ```
 $  pip3 install rfplasmid
 $  export PATH=$PATH:~/.local/bin # pip installs in ~/.local/bin and it should be in your path but some distros don't have this set (even though they should).
-$  rfplasmid --initialize #We makes use of a bash helper script to locate the rfplasmid.py file and to download the plasmid files
+$  rfplasmid --initialize #We makes use of a bash helper script to locate the rfplasmid.py file and to download the plasmid databases as they are too large for pip
 $  rfplasmid
 ```
 
