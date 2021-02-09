@@ -81,7 +81,7 @@ $ rfplasmid --initialize #We makes use of a bash helper script to locate the rfp
 $ rfplasmid
 ```
 
-### Using Pip. 
+### Using Pip 
 Installs most requirements except DIAMOND and JellyFish and R (see below). You need to download additional databases for CheckM if you have never installed it. 
 
 ```
@@ -103,7 +103,7 @@ $  tar xzvf checkm_data_2015_01_16.tar.gz
 $  checkm data setRoot ~/checkm_data
 ```
 
-### Dependencies you need to install 
+### Dependencies you need to install when installing it using pip
 RandomForest package in R ( https://cran.r-project.org/web/packages/randomForest/index.html ) (likely already installed). 
 ```
 $  R
@@ -124,7 +124,7 @@ $ cp jellyfish-linux ~/bin/jellyfish
 $ chmod +x ~/bin/jellyfish
 ```
 
-### This is for advanced users. 
+### For advanced users that don't use packagemanagers/environmentmanagers like Pip or Conda:
 
 You can get the source and using git and run from the folder you downloaded it to. You will need to install the requirements by hand as well
 ```
