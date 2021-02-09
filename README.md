@@ -55,7 +55,7 @@ $  rfplasmid --initialize #We makes use of a bash helper script to locate the rf
 $  rfplasmid
 ```
 
-### Optional if you have never installed CheckM before: 
+### Required if you have never installed CheckM before: 
 
 CheckM relies on a number of precalculated data files which can be downloaded from https://data.ace.uq.edu.au/public/CheckM_databases/. Decompress the file to an appropriate folder and run the following to inform CheckM of where the files have been placed. The example below uses wget to download the an archive of file and installs them in your homedir.
 ```
