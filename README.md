@@ -43,18 +43,32 @@ data of bacterial genomes and their antimicrobial resistance genes.
 
 ```
 $ rfplasmid --initialize # Only once after installing it. See "Getting the software" below
-$ rfplasmid [-h] --species SPECIES --input INPUT
-                                   [--training] [--specieslist] [--jelly]
-                                   [--out OUT] [--debug] [--threads THREADS]
-# example
-rfplasmid --species Campylobacter --input example --jelly --threads 8 --out output
-# compare output with the folder example_out
+$ rfplasmid
+
+Error; no arguments. Required to specificy --input and --species
+usage: rfplasmid.py [-h] [--species SPECIES] [--input INPUT] [--specieslist] [--jelly] [--out OUT] [--debug] [--training] [--threads THREADS] [--version]
+
+optional arguments:
+  -h, --help         show this help message and exit
+  --species SPECIES  define species (required)
+  --input INPUT      directory with input fasta files (required)
+  --specieslist      list of available species models
+  --jelly            run jellyfish as kmer-count (faster)
+  --out OUT          specify output directory
+  --debug            no cleanup of intermediate files
+  --training         trainings mode Random Forest
+  --threads THREADS  specify number of threads to be used, default is max available threads up to 16 threads
+  --version          print version number
+
+# Example
+rfplasmid --species Campylobacter --input inputfolder --jelly --threads 8 --out outputfolder
+
 ```
 A folder containing .fasta file is required as input.
 
 --jelly requires a functional jellyfish install. Greatly speeds up the analysis. Strongly recommended as our kmer profiling method in Python is slow
 
-Read specieslist.txt for species specific models. We have a general Enterobacteriaceae model instead of a species model. All others are species except for the "Bacteria" model which can be used for unknown or metagenomics samples.
+Read specieslist.txt or run rfplasmid --specieslist for species specific models. We have a general Enterobacteriaceae model instead of a species model. All others are species except for the "Bacteria" model which can be used for unknown or metagenomics samples.
 
 ## Getting the software:
 
