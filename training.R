@@ -4,6 +4,7 @@ df<-read.table("outputdataframe.csv", sep=",", header=T, row.names=1)
 featurevector <- substr(row.names(df), 1, 1)
 featurematrix <-df
 featurematrix$contigID <- NULL
+featurematrix$genome <- NULL
 rf <- randomForest(formula = y ~ x, x=featurematrix,y=as.factor(featurevector), ntree=5000, sampsize=(c(20, 20)))
 save(rf,file = "training.rfo")
 rf.classifications <- predict(rf,featurematrix)
