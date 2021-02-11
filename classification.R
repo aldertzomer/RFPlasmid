@@ -6,6 +6,7 @@ load(model)
 df<-read.table("outputdataframe.csv", sep=",", header=T, row.names=1)
 featurematrix <-df
 featurematrix$contigID <- NULL
+featurematrix$genome <- NULL
 #notice the missing featurevector generation and the use of predict
 rf.classifications <- predict(rf,featurematrix)
 rf.votes <- predict(rf,featurematrix, type="vote")
