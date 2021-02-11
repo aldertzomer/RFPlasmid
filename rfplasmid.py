@@ -35,7 +35,7 @@ input_directory = args.input
 
 # version
 if args.version:
-    print('RFPlasmid version 0.0.15')
+    print('RFPlasmid version 0.0.16')
     sys.exit()
 
 species_file = os.path.join(scriptlocation, "specieslist.txt")
@@ -67,7 +67,7 @@ if not args.species in species_list:
     print('Available species models: \n{}'.format(df_species.species.to_csv(index=False, header=False)))
     sys.exit()
 
-print('Start RFPlasmid, version 0.0.15')
+print('Start RFPlasmid, version 0.0.16')
 
 # make output folder
 if args.out:
