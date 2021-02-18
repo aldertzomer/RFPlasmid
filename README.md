@@ -98,11 +98,11 @@ $  rfplasmid
 CheckM relies on a number of precalculated data files which can be downloaded from https://data.ace.uq.edu.au/public/CheckM_databases/. Decompress the file to an appropriate folder and run the following to inform CheckM of where the files have been placed. The example below uses wget to download the an archive of file and installs them in your homedir.
 ```
 $  cd ~
-$  mkdir checkm_data
-$  cd checkm_data
+$  mkdir .checkm
+$  cd .checkm
 $  wget https://data.ace.uq.edu.au/public/CheckM_databases/checkm_data_2015_01_16.tar.gz
 $  tar xzvf checkm_data_2015_01_16.tar.gz
-$  checkm data setRoot ~/checkm_data
+$  checkm data setRoot ~/.checkm
 ```
 
 ### Dependencies you need to install when installing RFPlasmid using Pip
