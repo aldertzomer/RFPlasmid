@@ -1,4 +1,6 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![PIP](https://img.shields.io/pypi/v/RFPlasmid)](https://shields.io/)
+[![CONDA](https://img.shields.io/conda/v/bioconda/rfplasmid)](https://shields.io/)
 
 # RFPlasmid
 Predicting plasmid contigs from assemblies
