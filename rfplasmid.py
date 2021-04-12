@@ -34,14 +34,10 @@ species_import = args.species
 input_directory = args.input
 
 # version
+version = "0.0.17"
 if args.version:
-    print('RFPlasmid version 0.0.16')
-    sys.exit()
-
-species_file = os.path.join(scriptlocation, "specieslist.txt")
-df_species = pd.read_csv(species_file, header=None, sep=' ', names=['species', 'level'])
-level_import = next(iter(df_species.loc[df_species['species'] == species_import, 'level']), 'no match')
-species_list = df_species['species'].tolist()
+	print('RFPlasmid version %s' % version)
+	sys.exit()
 
 if args.specieslist:
     print('Available species models: \n{}'.format(df_species.species.to_csv(index=False, header=False)))
@@ -57,6 +53,12 @@ if not os.path.isdir(input_directory):
     print('%r is not a directory. Please use directory as input.' % input_directory)
     sys.exit()
 
+species_file = os.path.join(scriptlocation, "specieslist.txt")
+df_species = pd.read_csv(species_file, header=None, sep=' ', names=['species', 'level'])
+level_import = next(iter(df_species.loc[df_species['species'] == species_import, 'level']), 'no match')
+species_list = df_species['species'].tolist()
+	
+	
 if len(sys.argv) == 1:
     parser.print_help(sys.stderr)
     sys.exit()
@@ -67,18 +69,21 @@ if not args.species in species_list:
     print('Available species models: \n{}'.format(df_species.species.to_csv(index=False, header=False)))
     sys.exit()
 
-print('Start RFPlasmid, version 0.0.16')
+print('Start RFPlasmid, version %s' % version)
 
-# make output folder
+#make output folder
 if args.out:
-    print(args.out)
     new_dir = args.out
+    if not os.path.exists(new_dir):
+        os.mkdir(new_dir)
+    else:
+        now = datetime.now().strftime('%Y%m%d_%H%M%S')
+        new_dir = new_dir + '_' + now
+        os.mkdir(new_dir)		
 if not (args.out):
     now = datetime.now().strftime('%Y%m%d_%H%M%S')
-    new_dir = 'output_plasmidpredictor' + '_' + now
-
-os.mkdir(new_dir)
-
+    new_dir = 'RFPlasmid_output' + '_' + now
+	
 # copy original contigIDs
 print('copy original contig names')
 for fasta_file in glob.glob(os.path.join(input_directory, '*.fasta')):
@@ -110,10 +115,10 @@ os.chdir(new_dir)
 # Checkm
 print('start Checkm')
 os.system('checkm taxonomy_wf {} {} . checkm_output -x fasta --nt -t 16 > checkm_output.tsv'.format(level_import, species_import))
-
+	
 # check if Checkm files are made
 if not os.path.isfile("./checkm_output/{file}.ms".format(file=species_import)):
-    print("Error: Checkm is not working properly")
+    print("\nError: Checkm is not working properly.\nHave you installed the Checkm databases according to the github page of Checkm https://ecogenomics.github.io/CheckM/?")
     sys.exit()
 
 # check if contigs contain ORFs
@@ -455,7 +460,8 @@ if args.training:
     os.system('R --vanilla < {}'.format(trainings_location))
     print('training done')
 if not (args.training):
-    print('prediction mode')
+    print('RFPlasmid prediction mode started')
     classification_location = os.path.join(scriptlocation, "classification.R")
     os.system('R --vanilla --args {} {} < {}'.format(species_import, scriptlocation, classification_location))
     print('Prediction done')
+print('RFPlasmid output can be found in directory %s' %new_dir)
