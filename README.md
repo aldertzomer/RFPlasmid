@@ -84,7 +84,7 @@ $ rfplasmid
 ```
 
 ### Using Pip 
-Installs most requirements except DIAMOND and JellyFish and R (see below). You need to download additional databases for CheckM if you have never installed it. 
+Installs most requirements except DIAMOND and JellyFish and R (see below). You need to download both Prodigal and a database for CheckM if you have never installed it. 
 
 ```
 $  pip3 install rfplasmid
@@ -98,6 +98,8 @@ $  rfplasmid
 CheckM relies on a number of precalculated data files which can be downloaded from https://data.ace.uq.edu.au/public/CheckM_databases/. Decompress the file to an appropriate folder and run the following to inform CheckM of where the files have been placed. The example below uses wget to download the an archive of file and installs them in your homedir.
 ```
 $  cd ~
+$  wget https://github.com/hyattpd/Prodigal/releases/download/v2.6.3/prodigal.linux
+$  cp prodigal.linux ~/bin/prodigal #we assume you have a ~/bin/ folder and it's in your path. 
 $  mkdir .checkm
 $  cd .checkm
 $  wget https://data.ace.uq.edu.au/public/CheckM_databases/checkm_data_2015_01_16.tar.gz
