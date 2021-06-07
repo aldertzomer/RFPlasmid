@@ -97,6 +97,7 @@ $  rfplasmid
 
 CheckM relies on a number of precalculated data files which can be downloaded from https://data.ace.uq.edu.au/public/CheckM_databases/. Decompress the file to an appropriate folder and run the following to inform CheckM of where the files have been placed. The example below uses wget to download the an archive of file and installs them in your homedir.
 ```
+$  sudo apt install hmmer # CheckM needs HMMER. See http://hmmer.org/documentation.html for other methods of downloading and installing it
 $  cd ~
 $  wget https://github.com/hyattpd/Prodigal/releases/download/v2.6.3/prodigal.linux
 $  cp prodigal.linux ~/bin/prodigal #we assume you have a ~/bin/ folder and it's in your path. 
@@ -128,7 +129,7 @@ $ cp jellyfish-linux ~/bin/jellyfish
 $ chmod +x ~/bin/jellyfish
 ```
 
-### For advanced users that don't use packagemanagers/environmentmanagers like Pip or Conda:
+### For advanced users that want to install the latest version from Github:
 
 You can get the source and using git and run from the folder you downloaded it to. You will need to install the requirements by hand as well
 ```
