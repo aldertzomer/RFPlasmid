@@ -83,7 +83,7 @@ $ rfplasmid
 ```
 
 ### Using Pip 
-Installs most requirements except DIAMOND and JellyFish and R (see below). You need to download both Prodigal and a database for CheckM if you have never installed it. 
+Installs most requirements except DIAMOND and JellyFish and R (see below). You need to download HMMER, Prodigal and a database for CheckM if you have never installed it. 
 
 ```
 $  pip3 install rfplasmid
