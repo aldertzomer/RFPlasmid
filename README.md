@@ -75,7 +75,7 @@ Read specieslist.txt or run rfplasmid --specieslist for species specific models.
 ## Getting the software:
 
 ### Using Conda 
-thanks to https://github.com/rpetit3. Installs CheckM database as well.
+thanks to https://github.com/rpetit3. Installs CheckM database as well. A Google Colab notebook in this repository gives an example
 ```
 $ conda install -c bioconda rfplasmid # or alternatively: conda create -n rfplasmid -c conda-forge -c bioconda rfplasmid ; conda activate rfplasmid
 $ rfplasmid --initialize #We makes use of a bash helper script to locate the rfplasmid.py file and to download the plasmid databases as they are too large for conda
@@ -83,7 +83,7 @@ $ rfplasmid
 ```
 
 ### Using Pip 
-Installs most requirements except DIAMOND and JellyFish and R (see below). You need to download HMMER, Prodigal and a database for CheckM if you have never installed it. 
+Installs most requirements except DIAMOND and JellyFish and R (see below). You need to download HMMER, Prodigal and a database for CheckM if you have never installed it. A Google Colab notebook in this repository gives an example if you want to do this systemwide. This is much more work than Conda and requires more skills. 
 
 ```
 $  pip3 install rfplasmid
