@@ -193,12 +193,23 @@ Python 3 with pandas ( https://pandas.pydata.org/)
 ```
 $ sudo pip3 install pandas
 ```
-CheckM ( https://ecogenomics.github.io/CheckM/ ). According to the github page of CheckM:
+CheckM ( https://ecogenomics.github.io/CheckM/ ). According to the Wiki page of CheckM:
+
 ```
-$ sudo pip3 install numpy
-$ sudo pip3 install scipy
-$ sudo pip3 install pysam
-$ sudo pip3 install checkm-genome #install the CheckM databases as well. See the CheckM page
+$  sudo su -
+$  apt install hmmer # CheckM needs HMMER. See http://hmmer.org/documentation.html for other methods of downloading and installing it
+$  wget https://github.com/hyattpd/Prodigal/releases/download/v2.6.3/prodigal.linux
+$  cp prodigal.linux /usr/local/bin/prodigal
+$  chmod +x /usr/local/bin/prodigal 
+$  sudo pip3 install numpy
+$  sudo pip3 install scipy
+$  sudo pip3 install pysam
+$  sudo pip3 install checkm-genome 
+$  mkdir /usr/local/checkm_data
+$  cd /usr/local/checkm_data
+$  wget https://data.ace.uq.edu.au/public/CheckM_databases/checkm_data_2015_01_16.tar.gz
+$  tar xzvf checkm_data_2015_01_16.tar.gz
+$  checkm data setRoot/usr/local/checkm_data
 ```
 
 RandomForest package in R ( https://cran.r-project.org/web/packages/randomForest/index.html )
