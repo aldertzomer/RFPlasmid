@@ -101,6 +101,7 @@ $  sudo apt install hmmer # CheckM needs HMMER. See http://hmmer.org/documentati
 $  cd ~
 $  wget https://github.com/hyattpd/Prodigal/releases/download/v2.6.3/prodigal.linux
 $  cp prodigal.linux ~/bin/prodigal #we assume you have a ~/bin/ folder and it's in your path. 
+$  chmod +x ~/bin/prodigal  
 $  mkdir .checkm
 $  cd .checkm
 $  wget https://data.ace.uq.edu.au/public/CheckM_databases/checkm_data_2015_01_16.tar.gz
