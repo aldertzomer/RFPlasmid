@@ -77,8 +77,9 @@ Read specieslist.txt or run rfplasmid --specieslist for species specific models.
 ### Using Conda 
 thanks to https://github.com/rpetit3. Installs CheckM database as well. A Google Colab notebook in this repository gives an example
 ```
-$ conda install -c bioconda rfplasmid # or alternatively: conda create -n rfplasmid -c conda-forge -c bioconda rfplasmid ; conda activate rfplasmid
-$ rfplasmid --initialize #We makes use of a bash helper script to locate the rfplasmid.py file and to download the plasmid databases as they are too large for conda
+$ conda install -c bioconda rfplasmid 
+$ # or alternatively: conda create -n rfplasmid -c conda-forge -c bioconda rfplasmid ; conda activate rfplasmid
+$ rfplasmid --initialize # Bash helper script to locate rfplasmid.py and initialize the plasmid databases
 $ rfplasmid
 ```
 
