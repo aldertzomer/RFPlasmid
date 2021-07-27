@@ -287,7 +287,7 @@ The following steps need to be taken.
 1. Get and install RFPlasmid from Github
 2. Prepare a folder containing your plasmid contigs and your chromosome contigs. Draft genome assemblies are highly recommended, don't use completed genomes, as the genomes you want to analyze also won't be complete. Make sure that the plasmid contig file(s) start with "p" and the file(s) with the chromosomal contigs start with "c". In the example they are called plasmids.fasta and chromosomes.fasta, but as long as the files start with p or c your are good. They may also be separate files per genome/plasmid. You need about 20 plasmids and 20 chromosomes for a decent classification.
 3. Add the name of your genus/family/etc to specieslist.txt. Use the name exactly as it is listed in CheckM for the appropriate taxon level. It is not recommended to use a species level model, else you will have to deal with spaces in names. Use only genus level or higher. 
-4. Run RFplasmid in training mode. If you have very large numbers of contigs (>5000) it is recommended to adjust the sampsize option in the training.R script (change it to e.g. 1000, at most to 2/3rds of the smallest number of contigs per class).
+4. Run RFplasmid in training mode. If you have very large numbers of contigs (>5000) it is recommended to adjust the sampsize option in the training.R script. It is automatically set to the maximum value (2/3rds of the smallest number of contigs per class).
 5. Move the resulting training.rfo R object in the output folder to the RFplasmid folder and name it appropriately 
 6. Test your new plasmid prediction model
 
