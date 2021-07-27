@@ -34,7 +34,7 @@ species_import = args.species
 input_directory = args.input
 
 # version
-version = "0.0.17"
+version = "0.0.18"
 if args.version:
 	print('RFPlasmid version %s' % version)
 	sys.exit()
@@ -80,9 +80,10 @@ if args.out:
         now = datetime.now().strftime('%Y%m%d_%H%M%S')
         new_dir = new_dir + '_' + now
         os.mkdir(new_dir)		
-if not (args.out):
+if not args.out:
     now = datetime.now().strftime('%Y%m%d_%H%M%S')
     new_dir = 'RFPlasmid_output' + '_' + now
+    os.mkdir(new_dir)
 	
 # copy original contigIDs
 print('copy original contig names')
@@ -114,6 +115,8 @@ os.chdir(new_dir)
 
 # Checkm
 print('start Checkm')
+if args.species == 'Generic':
+    species_import = 'Bacteria'
 os.system('checkm taxonomy_wf {} {} . checkm_output -x fasta --nt -t 16 > checkm_output.tsv'.format(level_import, species_import))
 	
 # check if Checkm files are made
@@ -462,6 +465,8 @@ if args.training:
 if not (args.training):
     print('RFPlasmid prediction mode started')
     classification_location = os.path.join(scriptlocation, "classification.R")
+    if args.species == 'Generic':
+        species_import = 'Generic'
     os.system('R --vanilla --args {} {} < {}'.format(species_import, scriptlocation, classification_location))
     print('Prediction done')
 print('RFPlasmid output can be found in directory %s' %new_dir)
