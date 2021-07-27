@@ -18,8 +18,10 @@ A web-interface to test single fasta files is available here: http://klif.uu.nl/
     * [Pip](#using-pip)
       * [Getting CheckM databases](#required-if-you-have-never-installed-checkm-before)
       * [Dependencies](#dependencies-you-need-to-install-when-installing-rfplasmid-using-pip)
-    * [Installing development version from Github](#for-advanced-users-that-want-to-install-the-latest-version-from-github)
-* [Output files](#output-Files)
+    * [Installing development version from Github as regular user](#for-advanced-users-that-want-to-install-the-latest-version-from-github)
+    * [Systemwide install of development version from Github](#systemwide-install)
+    * [Google Colab notebook](#google-colab-notebook)
+* [Output files](#output-files)
 * [Output explained](#output-explained)
 * [Training models](#training-your-own-model)
 
@@ -248,6 +250,15 @@ $ wget https://github.com/gmarcais/Jellyfish/releases/download/v2.2.10/jellyfish
 $ sudo cp jellyfish-linux /usr/local/bin/jellyfish
 $ sudo chmod +x /usr/local/bin/jellyfish
 ```
+## Google Colab Notebook
+
+An alternative to installing RFPlasmid on your own server is running it from Google Colab. We have provided a Notebook suitable for Google Colab. Please navigate to 
+
+https://github.com/aldertzomer/RFPlasmid/blob/master/RFPlasmid_Conda_install_and_run.ipynb 
+
+and press "Open in Google Colab" and follow the instructions on the Google Colab notebook. 
+
+The direct link is available here but only works if you have a signed in to your Google account: https://colab.research.google.com/github/aldertzomer/RFPlasmid/blob/master/RFPlasmid_Conda_install_and_run.ipynb
 
 ## Output Files
 
