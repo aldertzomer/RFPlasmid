@@ -75,11 +75,12 @@ Read specieslist.txt or run rfplasmid --specieslist for species specific models.
 ## Getting the software:
 
 ### Using Conda 
-thanks to https://github.com/rpetit3. Installs CheckM database as well. A Google Colab notebook in this repository gives an example
+thanks to https://github.com/rpetit3. Installs CheckM database as well. A Google Colab notebook in this repository gives an example. The script rfplasmid is placed in ~/.local/bin and assumes that is in your PATH, which is according to the systemd specification (https://www.freedesktop.org/software/systemd/man/file-hierarchy.html). If not, please run the export PATH line. 
 ```
 $ conda install -c bioconda rfplasmid 
 $ # or alternatively: conda create -n rfplasmid -c conda-forge -c bioconda rfplasmid ; conda activate rfplasmid
 $ rfplasmid --initialize # Bash helper script to locate rfplasmid.py and initialize the plasmid databases
+$ export PATH=$PATH:~/.local/bin/ #only necessary if you have not included ~/.local/bin in your path (unusual but it has been observed). 
 $ rfplasmid
 ```
 
@@ -90,6 +91,7 @@ Installs most requirements except DIAMOND and JellyFish and R (see below). You n
 $  pip3 install rfplasmid
 $  export PATH=$PATH:~/.local/bin # pip installs in ~/.local/bin and it should be in your path but some distros don't have this set (even though they should).
 $  rfplasmid --initialize #We makes use of a bash helper script to locate the rfplasmid.py file and to download the plasmid databases as they are too large for pip
+$  export PATH=$PATH:~/.local/bin/ #only necessary if you have not included ~/.local/bin in your path (unusual but it has been observed). 
 $  rfplasmid
 ```
 
