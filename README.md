@@ -9,6 +9,20 @@ Predicting plasmid contigs from assemblies
 
 A web-interface to test single fasta files is available here: http://klif.uu.nl/rfplasmid/
 
+## Table of Contents
+
+* [Abstract](#abstract)
+* [How to run for the impatient](#running-rfplasmid)
+* [Getting the software](#getting-the-software)
+    * [Conda](#using-conda)
+    * [Pip](#using-pip)
+      * [Getting CheckM databases](#required-if-you-have-never-installed-checkm-before)
+      * [Dependencies](#dependencies-you-need-to-install-when-installing-rfplasmid-using-pip)
+    * [Installing development version from Github](#for-advanced-users-that-want-to-install-the-latest-version-from-github)
+* [Output files](#output-Files)
+* [Output explained](#output-explained)
+* [Training models](#training-your-own-model)
+
 ## Abstract
 
 Predicting plasmid contigs from assemblies using single copy marker genes, plasmid genes, kmers
@@ -72,7 +86,7 @@ A folder containing .fasta file is required as input.
 
 Read specieslist.txt or run rfplasmid --specieslist for species specific models. We have a general Enterobacteriaceae model instead of a species model. All others are species except for the "Bacteria" model which can be used for unknown or metagenomics samples.
 
-## Getting the software:
+## Getting the software
 
 ### Using Conda 
 thanks to https://github.com/rpetit3. Installs CheckM database as well. A Google Colab notebook in this repository gives an example. The script rfplasmid is placed in ~/.local/bin and assumes that is in your PATH, which is according to the systemd specification (https://www.freedesktop.org/software/systemd/man/file-hierarchy.html). If not, please run the export PATH line. 
@@ -95,7 +109,7 @@ $  export PATH=$PATH:~/.local/bin/ #only necessary if you have not included ~/.l
 $  rfplasmid
 ```
 
-### Required if you have never installed CheckM before: 
+### Required if you have never installed CheckM before
 
 CheckM relies on a number of precalculated data files which can be downloaded from https://data.ace.uq.edu.au/public/CheckM_databases/. Decompress the file to an appropriate folder and run the following to inform CheckM of where the files have been placed. The example below uses wget to download the an archive of file and installs them in your homedir.
 ```
@@ -132,7 +146,7 @@ $ cp jellyfish-linux ~/bin/jellyfish
 $ chmod +x ~/bin/jellyfish
 ```
 
-### For advanced users that want to install the latest version from Github:
+### For advanced users that want to install the latest version from Github
 
 You can get the source and using git and run from the folder you downloaded it to. You will need to install the requirements by hand as well
 ```
