@@ -15,4 +15,4 @@ Staphylococcus genus
 Streptomyces genus
 Vibrio genus
 Enterobacteriaceae family
-Bacteria domain
+Generic domain
