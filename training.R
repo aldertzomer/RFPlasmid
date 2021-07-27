@@ -5,7 +5,18 @@ featurevector <- substr(row.names(df), 1, 1)
 featurematrix <-df
 featurematrix$contigID <- NULL
 featurematrix$genome <- NULL
-rf <- randomForest(formula = y ~ x, x=featurematrix,y=as.factor(featurevector), ntree=5000, sampsize=(c(20, 20)))
+
+#determine optimalSampsize. We will find the number which is 2/3rd of the smallest class.
+p <- "p"
+s1 <- gsub(p,"",featurevector)
+numOcc1 <- sum(nchar(featurevector) - nchar(s1))
+c <- "c"
+s2 <- gsub(c,"",featurevector)
+numOcc2 <- sum(nchar(featurevector) - nchar(s2))
+optimalSampsize=round(min(numOcc1,numOcc2)*0.66) # 2/3rd of data for training, 1/3rd for OOB. 
+
+#train. 5000 trees may be too much but makes sure that in cases of extreme imbalance the largest group will not be undersampled.
+rf <- randomForest(formula = y ~ x, x=featurematrix,y=as.factor(featurevector), ntree=5000, sampsize=(c(optimalSampsize, optimalSampsize)))
 save(rf,file = "training.rfo")
 rf.classifications <- predict(rf,featurematrix)
 rf.votes <- predict(rf,featurematrix, type="vote")
