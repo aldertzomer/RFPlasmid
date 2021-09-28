@@ -319,7 +319,7 @@ for root, dirs, files in os.walk(os.getcwd()):
     if not os.path.isfile(filepath):
         df3 = df1
         df3 = df3.rename(columns={'genes': 'plasmid_genes'})
-        df3['SCM'] = np.NaN
+        df3['plasmid_genes'] = np.NaN
 
     # merge dataframes for each folder
     df_merge1 = pd.merge(df1, df2, left_on=['genome', 'contig'], right_on=['genome', 'contig'], how='left')
