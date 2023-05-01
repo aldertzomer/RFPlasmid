@@ -3,7 +3,7 @@ Args <- commandArgs(TRUE)
 library(randomForest)
 model<-paste(Args[2],"/",Args[1],".rfo",sep="")
 load(model)
-df<-read.table("outputdataframe.csv", sep=",", header=T, row.names=1)
+df<-read.table("outputdataframe.csv", sep=",", header=T, row.names=1, comment.char = "")
 featurematrix <-df
 featurematrix$contigID <- NULL
 featurematrix$genome <- NULL
