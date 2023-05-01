@@ -1,6 +1,6 @@
 #training
 library(randomForest)
-df<-read.table("outputdataframe.csv", sep=",", header=T, row.names=1)
+df<-read.table("outputdataframe.csv", sep=",", header=T, row.names=1, comment.char = "")
 featurevector <- substr(row.names(df), 1, 1)
 featurematrix <-df
 featurematrix$contigID <- NULL
