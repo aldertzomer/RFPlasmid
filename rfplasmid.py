@@ -32,9 +32,13 @@ parser.add_argument("--version", help="print version number", action="store_true
 args = parser.parse_args()
 species_import = args.species
 input_directory = args.input
-
+species_file = os.path.join(scriptlocation, "specieslist.txt")
+df_species = pd.read_csv(species_file, header=None, sep=' ', names=['species', 'level'])
+level_import = next(iter(df_species.loc[df_species['species'] == species_import, 'level']), 'no match')
+species_list = df_species['species'].tolist()
+	
 # version
-version = "0.0.18"
+version = "0.0.19"
 if args.version:
 	print('RFPlasmid version %s' % version)
 	sys.exit()
@@ -53,12 +57,6 @@ if not os.path.isdir(input_directory):
     print('%r is not a directory. Please use directory as input.' % input_directory)
     sys.exit()
 
-species_file = os.path.join(scriptlocation, "specieslist.txt")
-df_species = pd.read_csv(species_file, header=None, sep=' ', names=['species', 'level'])
-level_import = next(iter(df_species.loc[df_species['species'] == species_import, 'level']), 'no match')
-species_list = df_species['species'].tolist()
-	
-	
 if len(sys.argv) == 1:
     parser.print_help(sys.stderr)
     sys.exit()
@@ -154,7 +152,7 @@ for root, dirs, files in os.walk(os.getcwd()):
                 df1['hit'] = df1['hit'].round(0).astype(int)
                 df1 = df1.loc[df1['hit'] > 80]
                 df1['contig_gene'] = df1['contig_gene'].drop_duplicates()
-                df1['contig'], df1['gene'] = df1['contig_gene'].str.split('_', 1).str
+                df1[['contig', 'gene']] = df1['contig_gene'].str.split('_', n=1, expand=True)
                 df2 = df1.groupby(['contig']).size().reset_index(name='counts')
                 output_file = os.path.join(root, 'plasmiddbgenes_per_contig.txt')
                 with open(output_file, 'w') as out_file:
@@ -196,7 +194,7 @@ for root, dirs, files in os.walk(os.getcwd()):
                     gene = gene.split(' ')[0]
                     id.append(gene[1:])
             df = pd.DataFrame({'id': id})
-            df[['contig', 'gene']] = df['id'].str.split('_', expand=True)
+            df[['contig', 'gene']] = df['id'].str.split('_', n=1, expand=True)
             df2 = df['contig'].value_counts()
             output_file = os.path.join(root, 'genespercontig.txt')
             with open(output_file, 'w') as out_file:
@@ -213,7 +211,7 @@ for root, dirs, files in os.walk(os.getcwd()):
                 df = pd.read_csv(scm_file, header=None, delim_whitespace=True, usecols=[0], names=['contig_gene'])
                 df = df[~df['contig_gene'].str.contains("#")]
                 df['contig_gene'] = df['contig_gene'].drop_duplicates()
-                df['contig'], df['gene'] = df['contig_gene'].str.split('_', 1).str
+                df[['contig', 'gene']] = df['contig_gene'].str.split('_', n=1, expand=True)
                 df2 = df.groupby(['contig']).size().reset_index(name='counts')
                 output_file = os.path.join(root, 'SCMpercontig.txt')
                 with open(output_file, 'w') as out_file:
@@ -292,6 +290,9 @@ print('count contig length ; done')
 # next step: Work on files in different folders and merge to separate dfs
 print('Start merging contig files')
 
+import warnings
+warnings.simplefilter(action='ignore', category=pd.errors.PerformanceWarning)
+
 for root, dirs, files in os.walk(os.getcwd()):
     filepath = os.path.join(root, 'genespercontig.txt')
     if os.path.isfile(filepath):
@@ -367,7 +368,7 @@ df3 = df3.set_index('source')
 # import kmers
 if args.jelly:
     df4 = pd.read_csv('kmers.out', sep=' ', low_memory=False, header=None, names=['source', 'gene', 'bitscore'])
-    df4['genome'], df4['contig'] = df4['source'].str.rsplit('_', 1).str
+    df4[['genome', 'contig']] = df4['source'].str.rsplit('_', n=1, expand=True)
 if not (args.jelly):
     df4 = pd.read_csv('kmer.out', sep=' ', low_memory=False, header=None, names=['genome', 'contig', 'gene', 'bitscore'])
     df4['source'] = df4.genome.astype(str).str.cat(df4.contig.astype(str), sep='_')
@@ -470,3 +471,6 @@ if not (args.training):
     os.system('R --vanilla --args {} {} < {}'.format(species_import, scriptlocation, classification_location))
     print('Prediction done')
 print('RFPlasmid output can be found in directory %s' %new_dir)
+
+print('If you like this tool, please cite:') 
+print('van der Graaf-van Bloois, L., Wagenaar, J. A. & Zomer, A. L. RFPlasmid: predicting plasmid sequences from short read assembly data using machine learning. Microb. Genom. 7 (2021), doi.org/10.1099/mgen.0.000683') 
