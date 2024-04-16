@@ -296,7 +296,7 @@ All headers are explained below
 | genome              | Genome            | Name of genome                                                                                                             |
 | contig_length       | contig length     | length of contig in bases                                                                                                  |
 | SCM_genes           | % SCM             | Percentage of genes that is classified as chromosomal marker gene based   on CheckM                                        |
-| plasmid_genes_genes | % plasmid genes   | Percentage of genes that is classified as chromosomal marker gene based   on alignment against a plasmid proteins database |
+| plasmid_genes_genes | % plasmid genes   | Percentage of genes that is classified as plasmid marker gene based   on alignment against a plasmid proteins database |
 | plasmidcge_id       | %ID plasmidfinder | Highest identity percentage of hits against the PlasmidFinder database                                                     |
 | kmer_number         | Number of kmers   | Number of kmers in the contig                                                                                              |
 | SCM                 | SCM genes         | Number of genes that is classified as chromosomal marker gene based on   CheckM                                            |
