@@ -115,7 +115,7 @@ os.chdir(new_dir)
 print('start Checkm')
 if args.species == 'Generic':
     species_import = 'Bacteria'
-os.system('checkm taxonomy_wf {} {} . checkm_output -x fasta --nt -t 16 > checkm_output.tsv'.format(level_import, species_import))
+os.system('checkm taxonomy_wf {} {} . checkm_output -x fasta --nt -t {} > checkm_output.tsv'.format(level_import, species_import, args.threads))
 	
 # check if Checkm files are made
 if not os.path.isfile("./checkm_output/{file}.ms".format(file=species_import)):
@@ -233,7 +233,7 @@ if args.jelly:
     os.chdir(kmer_dir)
     for split_fasta in glob.glob('*.fasta'):
         basename = os.path.splitext(os.path.basename(split_fasta))[0]
-        os.system('cat {} | jellyfish count /dev/fd/0 -m 5 -c 20 -s 1000000 -t 16 -o /dev/fd/1 |jellyfish dump -c -t /dev/fd/0 |while read kmer ; do echo {} $kmer ; done >> ../kmers.out'.format(split_fasta, basename))
+        os.system('cat {} | jellyfish count /dev/fd/0 -m 5 -c 20 -s 1000000 -t {} -o /dev/fd/1 |jellyfish dump -c -t /dev/fd/0 |while read kmer ; do echo {} $kmer ; done >> ../kmers.out'.format(split_fasta, args.threads, basename))
     os.chdir("../")
     print('Jellyfish kmer-count done')
 if not (args.jelly):
