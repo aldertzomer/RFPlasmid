@@ -38,7 +38,7 @@ level_import = next(iter(df_species.loc[df_species['species'] == species_import,
 species_list = df_species['species'].tolist()
 	
 # version
-version = "1.0"
+version = "1.01"
 if args.version:
 	print('RFPlasmid version %s' % version)
 	sys.exit()
