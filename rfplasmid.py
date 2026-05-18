@@ -403,14 +403,29 @@ df5b.fillna(int(0), inplace=True)
 df5b['kmer_number'] = df5b.contig_length - 4
 df5b['kmer_number'] = df5b.kmer_number * 2
 
-# add column with genes/SCM en round to 2 decimals
+# coerce to numeric
 genes = pd.to_numeric(df5b['genes'], errors='coerce')
 scm = pd.to_numeric(df5b['SCM'], errors='coerce')
 plasmid_genes = pd.to_numeric(df5b['plasmid_genes'], errors='coerce')
 
+# add column with genes/SCM en round to 2 decimals
 # add column with genes/plasmid_genes en round to 2 decimals
-df5b['SCM_genes'] = (scm / genes).replace([np.inf, -np.inf], np.nan).fillna(0)
-df5b['plasmid_genes_genes'] = (plasmid_genes / genes).replace([np.inf, -np.inf], np.nan).fillna(0)
+#df5b['SCM_genes'] = (scm / genes).replace([np.inf, -np.inf], np.nan).fillna(0)
+#df5b['plasmid_genes_genes'] = (plasmid_genes / genes).replace([np.inf, -np.inf], np.nan).fillna(0)
+
+df5b['SCM_genes'] = (
+    (scm / genes)
+    .replace([np.inf, -np.inf], np.nan)
+    .fillna(0)
+    .round(2)
+)
+
+df5b['plasmid_genes_genes'] = (
+    (plasmid_genes / genes)
+    .replace([np.inf, -np.inf], np.nan)
+    .fillna(0)
+    .round(2)
+)
 
 # ID contig column to first position
 cols = list(df5b.columns.values)
