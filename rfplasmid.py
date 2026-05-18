@@ -433,7 +433,10 @@ df6 = pd.concat([df5da, df5db], axis=1)
 
 # kmer fraction
 df6[['kmer{}'.format(i) for i in range(1, 1+(2002-979)+1)]] = df6.loc[:, 'AAAAA':'TTTTT'].div(df6['kmer_number'], axis=0)
-df6.loc[:, 'kmer1':'kmer1024'] = df6.loc[:, 'kmer1':'kmer1024'].apply(lambda col: col.map('{:.2e}'.format))
+#df6.loc[:, 'kmer1':'kmer1024'] = df6.loc[:, 'kmer1':'kmer1024'].apply(lambda col: col.map('{:.2e}'.format))
+kmer_cols = df6.loc[:, 'kmer1':'kmer1024'].columns
+df6 = df6.astype({col: object for col in kmer_cols})
+df6.loc[:, kmer_cols] = df6.loc[:, kmer_cols].map('{:.2e}'.format)
 
 # delete some columns
 df6.drop(df6.columns.to_series()["AAAAA":"TTTTT"], axis=1, inplace=True)
