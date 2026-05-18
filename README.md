@@ -88,7 +88,7 @@ Read specieslist.txt or run rfplasmid --specieslist for species specific models.
 
 ## Getting the software
 
-### Using Conda 
+### Using Bioconda package
 thanks to https://github.com/rpetit3. Installs CheckM database as well. A Google Colab notebook in this repository gives an example. The script rfplasmid is placed in ~/.local/bin and assumes that is in your PATH, which is according to the systemd specification (https://www.freedesktop.org/software/systemd/man/file-hierarchy.html). If not, please run the export PATH line. 
 ```
 $ conda create --name rfplasmid python=3.9
@@ -97,6 +97,32 @@ $ conda install rfplasmid
 $ rfplasmid --initialize # Bash helper script to locate rfplasmid.py and initialize the plasmid databases
 $ export PATH=$PATH:~/.local/bin/ #only necessary if you have not included ~/.local/bin in your path (unusual but it has been observed). 
 $ rfplasmid
+```
+
+### Creating Conda environment directly from the spec-file from github for latest version
+```
+#get the repository
+$ git clone https://github.com/aldertzomer/RFPlasmid.git
+
+#install and activate the environment
+$ cd RFPlasmid
+$ conda create --name rfplasmid --file spec-file.txt 
+$ conda activate rfplasmid
+
+# rerun the checkm data setRoot command which shows up after installing checkm. for some reason it does not always set it correctly. 
+$ checkm data setRoot $CONDA_PREFIX/checkm_data
+
+#get the blast databases
+$ bash getdb.sh
+
+#run the example
+$ python rfplasmid.py --species Campylobacter --input example --out exampletest --threads 16 --jelly
+
+#should show 65 c
+$ tail -n +2 exampletest/prediction.csv  |grep \"c |cut -f 2 -d "," |sort|uniq -c
+
+#should show 73 p
+$ tail -n +2 exampletest/prediction.csv  |grep \"p |cut -f 2 -d "," |sort|uniq -c
 ```
 
 ### Using Pip 
