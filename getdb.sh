@@ -12,5 +12,3 @@ diamond makedb --in plasmiddb_cge.faa -d plasmiddb_cge
 diamond makedb --in plasmiddb_total.faa -d plasmiddb_total
 echo "Done"
 echo ""
-exit 1
-
